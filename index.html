@@ -10,7 +10,7 @@
 (function(){function g(){document.body&&document.body.removeAttribute('data-dc-editor-on');document.querySelectorAll('[contenteditable]').forEach(function(e){e.setAttribute('contenteditable','false')})}
 document.addEventListener('DOMContentLoaded',function(){g();new MutationObserver(g).observe(document.documentElement,{attributes:true,subtree:true,attributeFilter:['data-dc-editor-on','contenteditable']})})})();
 </script>
-<script src="support.js?v=1788890171399"></script>
+<script src="support.js?v=1789133852447"></script>
 </head>
 <body>
 <x-dc>
@@ -34,6 +34,10 @@ document.addEventListener('DOMContentLoaded',function(){g();new MutationObserver
     [style*="grid-template-columns:220px"],[style*="grid-template-columns:250px"]{grid-template-columns:minmax(88px,118px) 1fr 40px !important;gap:8px !important}
     [style*="minmax(300px"],[style*="minmax(220px"]{grid-template-columns:minmax(0,1fr) !important}
     [style*="ellipsis"]{white-space:normal !important}
+    [data-puente]{grid-template-columns:minmax(0,1fr) !important}
+    [data-puente] > *{border-left:0 !important;border-right:0 !important}
+    [data-puente] > * + *{border-top:1px solid #E5E1D4 !important}
+    [data-puente-flecha] svg{transform:rotate(90deg)}
   }
   @media print{
     .rail{display:none !important}
@@ -53,10 +57,10 @@ document.addEventListener('DOMContentLoaded',function(){g();new MutationObserver
   <div style="flex:1;overflow-y:auto;padding:16px 0;display:flex;flex-direction:column;gap:2px">
     <a href="#portada" style="display:block;padding:8px 22px;color:#fff;text-decoration:none;font:600 12px Archivo,sans-serif;opacity:.9">Portada</a>
     <a href="#intro" style="display:block;padding:8px 22px;color:#fff;text-decoration:none;font:600 12px Archivo,sans-serif;opacity:.9">Introducción</a>
-    <a href="#sec-1" style="display:block;padding:8px 22px;color:#fff;text-decoration:none;font:600 12px/1.35 Archivo,sans-serif;opacity:.9">01 · Una nueva gestión de información</a>
-    <a href="#sec-2" style="display:block;padding:8px 22px;color:#fff;text-decoration:none;font:600 12px/1.35 Archivo,sans-serif;opacity:.9">02 · Los postgrados en relaciones y cifras</a>
-    <a href="#sec-3" style="display:block;padding:8px 22px;color:#fff;text-decoration:none;font:600 12px/1.35 Archivo,sans-serif;opacity:.9">03 · Un Consejo regular</a>
-    <a href="#sec-4" style="display:block;padding:8px 22px;color:#fff;text-decoration:none;font:600 12px/1.35 Archivo,sans-serif;opacity:.9">04 · Investigación de estudiantes</a>
+    <a href="#sec-1" style="display:block;padding:8px 22px;color:#fff;text-decoration:none;font:600 12px/1.35 Archivo,sans-serif;opacity:.9">01 · Un Consejo regular</a>
+    <a href="#sec-2" style="display:block;padding:8px 22px;color:#fff;text-decoration:none;font:600 12px/1.35 Archivo,sans-serif;opacity:.9">02 · Una nueva gestión de información</a>
+    <a href="#sec-3" style="display:block;padding:8px 22px;color:#fff;text-decoration:none;font:600 12px/1.35 Archivo,sans-serif;opacity:.9">03 · Investigación de estudiantes</a>
+    <a href="#sec-4" style="display:block;padding:8px 22px;color:#fff;text-decoration:none;font:600 12px/1.35 Archivo,sans-serif;opacity:.9">04 · Los postgrados en relaciones y cifras</a>
     <a href="#sec-5" style="display:block;padding:8px 22px;color:#fff;text-decoration:none;font:600 12px/1.35 Archivo,sans-serif;opacity:.9">05 · Iniciativas de estudiantes</a>
   </div>
   <div style="padding:14px 22px 0;border-top:1px solid rgba(255,255,255,.14)">
@@ -66,28 +70,36 @@ document.addEventListener('DOMContentLoaded',function(){g();new MutationObserver
 
 <div class="main" style="margin-left:212px">
 
-  <header id="portada" class="cover" data-screen-label="Portada" style="min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:70px clamp(28px,6vw,90px) 60px;box-sizing:border-box;position:relative;overflow:hidden">
+  <header id="portada" class="cover" data-screen-label="Portada" style="min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:70px clamp(28px,6vw,90px) 60px;box-sizing:border-box;position:relative;overflow:hidden">
     <div style="position:absolute;top:0;right:0;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,#2F6B4F14 0%,transparent 70%)"></div>
     <div style="max-width:940px">
+      <img src="assets/logo-fahu.png?v=1789133852447" alt="Facultad de Humanidades USACH" style="height:125px;margin-bottom:22px;display:block">
       <div style="font:700 12px Archivo,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#2F6B4F;margin-bottom:18px">Vicedecanato de Investigación y Postgrado · Facultad de Humanidades USACH</div>
       <h1 style="font:900 clamp(52px,9vw,132px)/0.94 Archivo,sans-serif;color:#24533D;letter-spacing:-.02em;margin:0 0 8px">Postgrados</h1>
       <div style="font:800 clamp(22px,3.4vw,40px)/1.05 Archivo,sans-serif;color:#D99A2B;letter-spacing:-.01em;margin-bottom:26px">Boletín 2026</div>
       <div style="width:76px;height:6px;background:#D99A2B;border-radius:3px;margin-bottom:28px"></div>
-      <p style="font:500 clamp(17px,2.1vw,23px)/1.5 Spectral,serif;color:#46514B;max-width:620px;margin:0">Un recuento de los programas de postgrado de la Facultad de Humanidades: su gestión, sus cifras, su comunidad y las iniciativas que nacen de sus estudiantes.</p>
+      <p style="font:500 clamp(17px,2.1vw,23px)/1.5 Spectral,serif;color:#46514B;max-width:620px;margin:0">Revisita las dinámicas y trayectorias vinculadas a los postgrados de la Facultad de Humanidades: gestión, cifras, comunidad e iniciativas.</p>
     </div>
   </header>
 
   <section id="intro" data-screen-label="Introducción" style="padding:64px clamp(28px,6vw,90px) 70px;box-sizing:border-box;border-top:1px solid #E5E1D4">
     <div style="max-width:940px">
       <div style="font:600 10px Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#2F6B4F;margin-bottom:10px">Introducción</div>
-      <p style="font:400 clamp(15px,1.55vw,17px)/1.66 Spectral,serif;color:#46514B;max-width:760px;margin:0">La Facultad de Humanidades y el Instituto de Estudios Avanzados administran quince programas de magíster y doctorado. Este boletín reúne, en cinco apartados, lo que el Vicedecanato de Investigación y Postgrado ha construido con ellos: una nueva forma de gestionar su información, las cifras que describen su comunidad, el Consejo que los articula, la investigación de sus estudiantes y las iniciativas culturales que estos impulsan.</p>
+      <h2 style="font:800 clamp(26px,3.4vw,40px)/1.08 Archivo,sans-serif;color:#24533D;letter-spacing:-.01em;margin:0 0 16px">Los postgrados y el presente</h2>
+      <div style="width:56px;height:5px;background:#D99A2B;border-radius:3px;margin-bottom:24px"></div>
+      <p style="font:400 clamp(15px,1.55vw,17px)/1.66 Spectral,serif;color:#46514B;max-width:760px;margin:0 0 16px">Los estudios de postgrado ocupan hoy un lugar central tanto en las universidades como en la vida de las sociedades contemporáneas. Son el espacio donde se forma quien investiga, se especializa o diversifica sus modos de actuación o comprensión en las dinámicas comunes, se actualizan dinámicas profesionales y docentes, y se elaboran las preguntas requeridas para&nbsp;la actualización colectiva. En la Facultad de Humanidades estos procesos adquieren la especificidad de vincularse a procesos que implican la memoria social, la lengua, la educación, la cultura y la política, es decir, las materias con que una comunidad interpreta su pasado y decide su porvenir.</p>
+      <p style="font:400 clamp(15px,1.55vw,17px)/1.66 Spectral,serif;color:#46514B;max-width:760px;margin:0">Al año 2026, la Facultad de Humanidades y el Instituto de Estudios Avanzados administran en conjunto un total de quince programas de magíster y doctorado. Este cuarto boletín de cuenta extendida reúne, en cinco apartados, lo que el Vicedecanato de Investigación y Postgrado ha articulado gracias al trabajo desarrollado por sus equipos académicos, que implican la existencia de un Consejo regular, nuevas forma de gestionar su información, la investigación de sus estudiantes, las cifras que describen su comunidad y las iniciativas culturales que impulsadas en conjunto.</p>
+      <p style="font:400 clamp(15px,1.55vw,17px)/1.66 Spectral,serif;color:#46514B;max-width:760px;margin:16px 0 0">Con este boletín, el Vicedecanato de Investigación y Postgrados finaliza su participación en la cuenta extendida. Esperamos que las cifras, relaciones, procesos y plataformas que aquí se informan, brinden una perspectiva que promueva futuros desarrollos y faciliten las actividades de recuperación de información y gestión de los programas y equipos de postgrado de la Facultad de Humanidades e IDEA.</p>
+      <div style="margin-top:26px;padding-top:18px;border-top:1px solid #E5E1D4;max-width:760px">
+        <div style="font:600 14.5px Archivo,sans-serif;color:#24533D;text-align:right">Equipo Vicedecanato de Investigación y Postgrado</div>
+      </div>
       <div style="margin-top:34px;background:#fff;border:1px solid #E5E1D4;border-radius:14px;padding:26px 28px">
         <div style="font:700 12px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#2F6B4F;margin-bottom:14px">Contenido del boletín</div>
         <div style="display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:14px 22px">
-          <a href="#sec-1" style="display:flex;gap:12px;align-items:baseline;text-decoration:none;padding:6px 0"><span style="font:600 13px IBM Plex Mono,monospace;color:#D99A2B">01</span><span><span style="display:block;font:600 15px Archivo,sans-serif;color:#24533D">Una nueva gestión de información de postgrados</span><span style="display:block;font:400 12.5px/1.5 Spectral,serif;color:#8A8272;margin-top:3px">Plataforma VIP: normativa, cursos multidisciplinares, trayectorias académicas</span></span></a>
-          <a href="#sec-2" style="display:flex;gap:12px;align-items:baseline;text-decoration:none;padding:6px 0"><span style="font:600 13px IBM Plex Mono,monospace;color:#D99A2B">02</span><span><span style="display:block;font:600 15px Archivo,sans-serif;color:#24533D">Los postgrados en relaciones y cifras</span><span style="display:block;font:400 12.5px/1.5 Spectral,serif;color:#8A8272;margin-top:3px">Acreditaciones · articulación · estudiantes articulados · matrícula · Expo Postgrados · graduados</span></span></a>
-          <a href="#sec-3" style="display:flex;gap:12px;align-items:baseline;text-decoration:none;padding:6px 0"><span style="font:600 13px IBM Plex Mono,monospace;color:#D99A2B">03</span><span><span style="display:block;font:600 15px Archivo,sans-serif;color:#24533D">Un Consejo regular</span><span style="display:block;font:400 12.5px/1.5 Spectral,serif;color:#8A8272;margin-top:3px">Creación del Consejo de Postgrados FAHU (STD 23694/2026)</span></span></a>
-          <a href="#sec-4" style="display:flex;gap:12px;align-items:baseline;text-decoration:none;padding:6px 0"><span style="font:600 13px IBM Plex Mono,monospace;color:#D99A2B">04</span><span><span style="display:block;font:600 15px Archivo,sans-serif;color:#24533D">Investigación de estudiantes</span><span style="display:block;font:400 12.5px/1.5 Spectral,serif;color:#8A8272;margin-top:3px">Tesis 2020–2025: programas, género, proyectos, temáticas</span></span></a>
+          <a href="#sec-1" style="display:flex;gap:12px;align-items:baseline;text-decoration:none;padding:6px 0"><span style="font:600 13px IBM Plex Mono,monospace;color:#D99A2B">01</span><span><span style="display:block;font:600 15px Archivo,sans-serif;color:#24533D">Un Consejo regular</span><span style="display:block;font:400 12.5px/1.5 Spectral,serif;color:#8A8272;margin-top:3px">Creación del Consejo de Postgrados FAHU (STD 23694/2026)</span></span></a>
+          <a href="#sec-2" style="display:flex;gap:12px;align-items:baseline;text-decoration:none;padding:6px 0"><span style="font:600 13px IBM Plex Mono,monospace;color:#D99A2B">02</span><span><span style="display:block;font:600 15px Archivo,sans-serif;color:#24533D">Una nueva gestión de información de postgrados</span><span style="display:block;font:400 12.5px/1.5 Spectral,serif;color:#8A8272;margin-top:3px">Plataforma VIP: normativa, cursos multidisciplinares, trayectorias académicas</span></span></a>
+          <a href="#sec-3" style="display:flex;gap:12px;align-items:baseline;text-decoration:none;padding:6px 0"><span style="font:600 13px IBM Plex Mono,monospace;color:#D99A2B">03</span><span><span style="display:block;font:600 15px Archivo,sans-serif;color:#24533D">Investigación de estudiantes</span><span style="display:block;font:400 12.5px/1.5 Spectral,serif;color:#8A8272;margin-top:3px">Tesis 2024–2025: programas, líneas, temáticas, proyectos</span></span></a>
+          <a href="#sec-4" style="display:flex;gap:12px;align-items:baseline;text-decoration:none;padding:6px 0"><span style="font:600 13px IBM Plex Mono,monospace;color:#D99A2B">04</span><span><span style="display:block;font:600 15px Archivo,sans-serif;color:#24533D">Los postgrados en relaciones y cifras</span><span style="display:block;font:400 12.5px/1.5 Spectral,serif;color:#8A8272;margin-top:3px">Acreditaciones · articulación · estudiantes articulados · matrícula · Expo Postgrados · graduados</span></span></a>
           <a href="#sec-5" style="display:flex;gap:12px;align-items:baseline;text-decoration:none;padding:6px 0"><span style="font:600 13px IBM Plex Mono,monospace;color:#D99A2B">05</span><span><span style="display:block;font:600 15px Archivo,sans-serif;color:#24533D">Iniciativas de estudiantes de postgrado</span><span style="display:block;font:400 12.5px/1.5 Spectral,serif;color:#8A8272;margin-top:3px">Entre estanterías y acordes · Feria del Libro FAHU</span></span></a>
         </div>
       </div>
@@ -95,30 +107,132 @@ document.addEventListener('DOMContentLoaded',function(){g();new MutationObserver
   </section>
 
   <!-- 01 -->
-  <section id="sec-1" class="section" data-screen-label="01 Gestión de información" style="padding:80px clamp(28px,6vw,90px) 70px;box-sizing:border-box;border-top:1px solid #E5E1D4">
+  <section id="sec-1" class="section" data-screen-label="01 Consejo regular" style="padding:80px clamp(28px,6vw,90px) 70px;box-sizing:border-box;border-top:1px solid #E5E1D4">
     <div style="max-width:940px">
       <div style="display:flex;align-items:baseline;gap:18px;margin-bottom:14px">
         <span style="font:800 clamp(44px,6vw,72px)/1 Archivo,sans-serif;color:#EAE6D9;-webkit-text-stroke:1.5px #2F6B4F">01</span>
-        <h2 style="font:800 clamp(26px,3.4vw,40px)/1.08 Archivo,sans-serif;color:#24533D;letter-spacing:-.01em;margin:0">Una nueva gestión de información de postgrados</h2>
+        <h2 style="font:800 clamp(26px,3.4vw,40px)/1.08 Archivo,sans-serif;color:#24533D;letter-spacing:-.01em;margin:0">Un Consejo regular</h2>
+      </div>
+      <div style="width:56px;height:5px;background:#D99A2B;border-radius:3px;margin-bottom:22px"></div>
+      <p style="font:400 15.5px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 14px">Desde el año 2022, la Facultad de Humanidades constituyó operativamente un <strong style="font-weight: 600; color: rgb(36, 83, 61);">Consejo de Postgrados</strong>, espacio que convoca y en que participan quienes ostenten las direcciones de programa, sus coordinaciones y personal administrativo, integrando sus quince programas y el Vicedecanato de Investigación y Postgrado. Los aspectos que originan la instancia se relacionan con&nbsp;que las decisiones que afectan a todos los programas sean dialogadas, esperando articular la heterogeneidad de propósitos y dinámicas de cada uno de los postgrados, derivando en acuerdos concretos de trabajo.</p>
+      <p style="font:400 15.5px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 14px">Desde el año 2026, este espacio ha sido formalizado mediante una resolución interna. Su valor radica en su regularidad y su periodicidad, permitiendo anticipar los proceso, articular propuestas emergentes desde los programas y compartir aprendizajes. Este espacio no reemplaza la administración de los programas a través de sus comités, sino brinda un lugar para la&nbsp;coordinación y actuación colectiva de postgrados.</p>
+      
+      
+
+      <figure style="margin:0 0 30px;max-width:560px">
+        <div style="border:1px solid #E5E1D4;border-radius:14px;overflow:hidden;background:#F1EFE8">
+          <svg viewBox="0 0 940 560" style="width:100%;height:auto;display:block" role="img" aria-label="Composición geométrica de veinticinco figuras reunidas en torno a una mesa">
+          <rect x="0" y="0" width="940" height="560" fill="#F1EFE8"></rect>
+          <path d="M0,0 L300,0 A300,300 0 0 1 0,300 Z" fill="#E6E2D4"></path>
+          <circle cx="874" cy="58" r="46" fill="none" stroke="#D99A2B" stroke-width="7"></circle>
+          <path d="M940,560 L730,560 A210,210 0 0 0 940,350 Z" fill="#E0E7DF"></path>
+          <rect x="0" y="544" width="940" height="16" fill="#37413B"></rect>
+          <ellipse cx="470" cy="298" rx="236" ry="124" fill="#37413B"></ellipse>
+          <ellipse cx="470" cy="290" rx="236" ry="124" fill="#24533D"></ellipse>
+          <ellipse cx="470" cy="290" rx="208" ry="102" fill="none" stroke="#5E9578" stroke-width="3"></ellipse>
+          <circle cx="470" cy="290" r="34" fill="#D99A2B"></circle>
+          <path d="M436,290 A34,34 0 0 1 504,290 Z" fill="#F1EFE8"></path>
+          <g transform="translate(470.0,78.0) rotate(180.0)"><circle cx="0" cy="0" r="13" fill="#24533D"></circle><path d="M-19,13 A19,19 0 0 0 19,13 Z" fill="#D99A2B"></path></g>
+          <g transform="translate(557.5,84.7) rotate(-156.9)"><circle cx="0" cy="0" r="13" fill="#2F6B4F"></circle><rect x="-16" y="16" width="32" height="20" rx="3" fill="#2F6B4F"></rect></g>
+          <g transform="translate(639.6,104.2) rotate(-137.6)"><circle cx="0" cy="0" r="13" fill="#5E9578"></circle><path d="M0,12 L20,36 L-20,36 Z" fill="#5E9578"></path></g>
+          <g transform="translate(711.0,135.5) rotate(-122.7)"><circle cx="0" cy="0" r="13" fill="#24533D"></circle><path d="M-19,13 A19,19 0 0 0 19,13 Z" fill="#24533D"></path></g>
+          <g transform="translate(767.2,176.4) rotate(-110.9)"><circle cx="0" cy="0" r="13" fill="#2F6B4F"></circle><rect x="-16" y="16" width="32" height="20" rx="3" fill="#2F6B4F"></rect></g>
+          <g transform="translate(804.8,224.5) rotate(-101.1)"><circle cx="0" cy="0" r="13" fill="#5E9578"></circle><path d="M0,12 L20,36 L-20,36 Z" fill="#D99A2B"></path></g>
+          <g transform="translate(821.3,276.7) rotate(-92.2)"><circle cx="0" cy="0" r="13" fill="#24533D"></circle><path d="M-19,13 A19,19 0 0 0 19,13 Z" fill="#24533D"></path></g>
+          <g transform="translate(815.8,329.7) rotate(-83.4)"><circle cx="0" cy="0" r="13" fill="#2F6B4F"></circle><rect x="-16" y="16" width="32" height="20" rx="3" fill="#2F6B4F"></rect></g>
+          <g transform="translate(788.5,380.3) rotate(-74.2)"><circle cx="0" cy="0" r="13" fill="#5E9578"></circle><path d="M0,12 L20,36 L-20,36 Z" fill="#5E9578"></path></g>
+          <g transform="translate(741.2,425.1) rotate(-63.5)"><circle cx="0" cy="0" r="13" fill="#24533D"></circle><path d="M-19,13 A19,19 0 0 0 19,13 Z" fill="#24533D"></path></g>
+          <g transform="translate(676.9,461.5) rotate(-50.3)"><circle cx="0" cy="0" r="13" fill="#2F6B4F"></circle><rect x="-16" y="16" width="32" height="20" rx="3" fill="#D99A2B"></rect></g>
+          <g transform="translate(599.6,487.1) rotate(-33.3)"><circle cx="0" cy="0" r="13" fill="#5E9578"></circle><path d="M0,12 L20,36 L-20,36 Z" fill="#5E9578"></path></g>
+          <g transform="translate(514.1,500.3) rotate(-11.8)"><circle cx="0" cy="0" r="13" fill="#24533D"></circle><path d="M-19,13 A19,19 0 0 0 19,13 Z" fill="#24533D"></path></g>
+          <g transform="translate(425.9,500.3) rotate(11.8)"><circle cx="0" cy="0" r="13" fill="#2F6B4F"></circle><rect x="-16" y="16" width="32" height="20" rx="3" fill="#2F6B4F"></rect></g>
+          <g transform="translate(340.4,487.1) rotate(33.3)"><circle cx="0" cy="0" r="13" fill="#5E9578"></circle><path d="M0,12 L20,36 L-20,36 Z" fill="#5E9578"></path></g>
+          <g transform="translate(263.1,461.5) rotate(50.3)"><circle cx="0" cy="0" r="13" fill="#24533D"></circle><path d="M-19,13 A19,19 0 0 0 19,13 Z" fill="#D99A2B"></path></g>
+          <g transform="translate(198.8,425.1) rotate(63.5)"><circle cx="0" cy="0" r="13" fill="#2F6B4F"></circle><rect x="-16" y="16" width="32" height="20" rx="3" fill="#2F6B4F"></rect></g>
+          <g transform="translate(151.5,380.3) rotate(74.2)"><circle cx="0" cy="0" r="13" fill="#5E9578"></circle><path d="M0,12 L20,36 L-20,36 Z" fill="#5E9578"></path></g>
+          <g transform="translate(124.2,329.7) rotate(83.4)"><circle cx="0" cy="0" r="13" fill="#24533D"></circle><path d="M-19,13 A19,19 0 0 0 19,13 Z" fill="#24533D"></path></g>
+          <g transform="translate(118.7,276.7) rotate(92.2)"><circle cx="0" cy="0" r="13" fill="#2F6B4F"></circle><rect x="-16" y="16" width="32" height="20" rx="3" fill="#2F6B4F"></rect></g>
+          <g transform="translate(135.2,224.5) rotate(101.1)"><circle cx="0" cy="0" r="13" fill="#5E9578"></circle><path d="M0,12 L20,36 L-20,36 Z" fill="#D99A2B"></path></g>
+          <g transform="translate(172.8,176.4) rotate(110.9)"><circle cx="0" cy="0" r="13" fill="#24533D"></circle><path d="M-19,13 A19,19 0 0 0 19,13 Z" fill="#24533D"></path></g>
+          <g transform="translate(229.0,135.5) rotate(122.7)"><circle cx="0" cy="0" r="13" fill="#2F6B4F"></circle><rect x="-16" y="16" width="32" height="20" rx="3" fill="#2F6B4F"></rect></g>
+          <g transform="translate(300.4,104.2) rotate(137.6)"><circle cx="0" cy="0" r="13" fill="#5E9578"></circle><path d="M0,12 L20,36 L-20,36 Z" fill="#5E9578"></path></g>
+          <g transform="translate(382.5,84.7) rotate(156.9)"><circle cx="0" cy="0" r="13" fill="#24533D"></circle><path d="M-19,13 A19,19 0 0 0 19,13 Z" fill="#24533D"></path></g>
+          </svg>
+        </div>
+        
+      </figure>
+
+      <h3 style="font:800 18px/1.25 Archivo,sans-serif;color:#24533D;margin:0 0 14px">Características del Consejo de Postgrado FAHU e IDEA</h3>
+      <div style="display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:12px">
+        <div style="background:#24533D;color:#fff;border-radius:12px;padding:20px 22px">
+          <div style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">Preside</div>
+          <div style="font:700 16px/1.25 Archivo,sans-serif;margin-top:6px">Vicedecana/o de Investigación y Postgrado</div>
+          <p style="font:400 13px/1.55 Spectral,serif;opacity:.85;margin:10px 0 0">Preside y guía la articulación del Consejo para todos los efectos.</p>
+        </div>
+        <div style="background:#fff;border:1px solid #E5E1D4;border-radius:12px;padding:20px 22px">
+          <div style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">Integrantes regulares</div>
+          <div style="font:700 16px/1.25 Archivo,sans-serif;color:#24533D;margin-top:6px">Direcciones, coordinaciones y apoyos administrativos</div>
+          <p style="font:400 13px/1.55 Spectral,serif;color:#46514B;margin:10px 0 0">El Consejo se integra por las direcciones de programas, sus coordinaciones y apoyos administrativos.</p>
+        </div>
+        <div style="background:#fff;border:1px solid #E5E1D4;border-radius:12px;padding:20px 22px">
+          <div style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">Invitadas/os</div>
+          <div style="font:700 16px/1.25 Archivo,sans-serif;color:#24533D;margin-top:6px">Agentes internos y externos</div>
+          <p style="font:400 13px/1.55 Spectral,serif;color:#46514B;margin:10px 0 0">Convocados a sesiones específicas cuando su participación se vincula a los propósitos del Consejo.</p>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:12px;margin-top:12px">
+        <div style="background:#fff;border:1px solid #E5E1D4;border-radius:12px;padding:20px 22px">
+          <div style="font:700 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#2F6B4F;margin-bottom:12px">Propósito</div>
+          <div style="display:flex;flex-wrap:wrap;gap:7px">
+            <span style="font:600 12px Archivo,sans-serif;color:#24533D;background:#F1EFE8;border-radius:999px;padding:6px 12px">Articulación del desarrollo académico</span>
+            <span style="font:600 12px Archivo,sans-serif;color:#24533D;background:#F1EFE8;border-radius:999px;padding:6px 12px">Aseguramiento de la calidad</span>
+            <span style="font:600 12px Archivo,sans-serif;color:#24533D;background:#F1EFE8;border-radius:999px;padding:6px 12px">Mejoramiento continuo</span>
+            <span style="font:600 12px Archivo,sans-serif;color:#24533D;background:#F1EFE8;border-radius:999px;padding:6px 12px">Acreditación</span>
+            <span style="font:600 12px Archivo,sans-serif;color:#24533D;background:#F1EFE8;border-radius:999px;padding:6px 12px">Seguimiento curricular</span>
+            <span style="font:600 12px Archivo,sans-serif;color:#24533D;background:#F1EFE8;border-radius:999px;padding:6px 12px">Vinculación estratégica</span>
+          </div>
+          <p style="font:400 13px/1.55 Spectral,serif;color:#8A8272;margin:14px 0 0">En concordancia con los Criterios y Estándares de la CNA-Chile, para los programas de magíster y doctorado administrados académicamente por la Facultad.</p>
+        </div>
+        <div style="background:#fff;border:1px solid #E5E1D4;border-radius:12px;padding:20px 22px">
+          <div style="font:700 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#2F6B4F;margin-bottom:12px">Régimen de sesiones</div>
+          <div style="display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:8px">
+            <div style="text-align:center;background:#F1EFE8;border-radius:10px;padding:12px 6px"><div style="font:600 24px/1 IBM Plex Mono,monospace;color:#24533D">1</div><div style="font:400 11px/1.35 Archivo,sans-serif;color:#8A8272;margin-top:5px">sesión ordinaria al mes, en lo posible</div></div>
+            <div style="text-align:center;background:#F1EFE8;border-radius:10px;padding:12px 6px"><div style="font:600 24px/1 IBM Plex Mono,monospace;color:#24533D">≥2</div><div style="font:400 11px/1.35 Archivo,sans-serif;color:#8A8272;margin-top:5px">sesiones registradas por semestre</div></div>
+            <div style="text-align:center;background:#F1EFE8;border-radius:10px;padding:12px 6px"><div style="font:600 24px/1 IBM Plex Mono,monospace;color:#D99A2B">+</div><div style="font:400 11px/1.35 Archivo,sans-serif;color:#8A8272;margin-top:5px">extraordinarias por convocatoria o mayoría</div></div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section id="sec-2" class="section" data-screen-label="02 Gestión de información" style="padding:80px clamp(28px,6vw,90px) 70px;box-sizing:border-box;border-top:1px solid #E5E1D4">
+    <div style="max-width:940px">
+      <div style="display:flex;align-items:center;gap:18px;margin-bottom:14px">
+        <span style="font:800 clamp(44px,6vw,72px)/1 Archivo,sans-serif;color:#EAE6D9;-webkit-text-stroke:1.5px #2F6B4F;flex:0 0 auto">02</span>
+        <h2 style="font:800 clamp(26px,3.4vw,40px)/1.08 Archivo,sans-serif;color:#24533D;letter-spacing:-.01em;margin:0;text-wrap:balance">Una nueva gestión de información de postgrados</h2>
       </div>
       <div style="width:56px;height:5px;background:#D99A2B;border-radius:3px;margin-bottom:22px"></div>
       <p style="font:400 15.5px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 14px">El Vicedecanato ha sostenido las actividades regulares de actualización de los cuerpos académicos de acuerdo a orientaciones de la Comisión Nacional de Acreditación (CNA) y ha facilitado el desarrollo de iniciativas de articulación docente entre programas a través de los Cursos de Formación Multidisciplinar. En pos de promover trayectorias académicas, asimismo, ha participado además en el ordenamiento de los procesos de jerarquización y encasillamiento académico.</p>
       <p style="font:400 15.5px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 30px">Considerando que todos los anteriores procesos contemplan múltiples flujos, producción de información, a fin de evitar su registro en plataformas y sistemas diversos, se ha construido una plataforma web de gestión, denominada&nbsp;<strong style="font-weight: 600; color: rgb(36, 83, 61);">Gestión de Información VIP</strong><span style="color: rgb(36, 83, 61);">, que actualmente integra&nbsp;</span>tres subsistemas en operación que siguen principios comunes: una fuente única de datos, roles de acceso diferenciados y una visualización pública cuando la información lo permite.</p>
+      <p style="font:400 15.5px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 30px">Cabe destacar el papel de los <b>Cursos de Formación Multidisciplinar</b> en estos procesos. Como una iniciativa emergente del Consejo de Postgrados, esta infraestructura permite a los programas ofertar y conocer la disponibilidad de cursos puestos a disposición por los comités de programa de postgrado a estudiantes de otros programas, a fin de ser planeados y considerados como parte de su oferta formativa (por ejemplo, de Cursos Electivos). Ello no solo promueve la formación multidisciplinaria, sino hace promueve el rendimiento de los mismos cursos y expande los vínculos y relaciones de quienes se forman en la Facultad de Humanidades e IDEA.</p>
 
       <div style="display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:12px">
-        <a id="sub-1a" href="https://vipfahu.netlify.app/normativa" target="_blank" rel="noopener" style="display:block;text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-top:4px solid #2F6B4F;border-radius:12px;padding:18px 18px 16px">
+        <a id="sub-2a" href="https://vipfahu.netlify.app/normativa" target="_blank" rel="noopener" style="display:block;text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-top:4px solid #2F6B4F;border-radius:12px;padding:18px 18px 16px">
           <div style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">a · público y gestión interna</div>
           <div style="font:700 16px/1.25 Archivo,sans-serif;color:#24533D;margin-top:6px">Normativa de postgrados</div>
           <p style="font:400 13px/1.55 Spectral,serif;color:#46514B;margin:10px 0 0">Buscador de resoluciones, reglamentos y decretos con estado de vigencia y visor de PDF. Un panel con cuentas permite cargar y reemplazar documentos sin intermediarios.</p>
           <div style="font:600 11.5px Archivo,sans-serif;color:#2F6B4F;margin-top:14px">vipfahu.netlify.app/normativa →</div>
         </a>
-        <a id="sub-1b" href="https://vipfahu.netlify.app/cursos" target="_blank" rel="noopener" style="display:block;text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-top:4px solid #5E9578;border-radius:12px;padding:18px 18px 16px">
+        <a id="sub-2b" href="https://vipfahu.netlify.app/cursos" target="_blank" rel="noopener" style="display:block;text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-top:4px solid #5E9578;border-radius:12px;padding:18px 18px 16px">
           <div style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">b · público y gestión interna</div>
           <div style="font:700 16px/1.25 Archivo,sans-serif;color:#24533D;margin-top:6px">Cursos de Formación Multidisciplinar</div>
           <p style="font:400 13px/1.55 Spectral,serif;color:#46514B;margin:10px 0 0">Oferta semestral de cursos abiertos entre programas: 94 cursos en 2026, filtrables por programa, tipo, jornada y día, con matriz ordenable y gráficos. Cada dirección de programa edita su propia oferta.</p>
           <div style="font:600 11.5px Archivo,sans-serif;color:#2F6B4F;margin-top:14px">vipfahu.netlify.app/cursos →</div>
         </a>
-        <a id="sub-1c" href="https://vipfahu.netlify.app/trayectorias" target="_blank" rel="noopener" style="display:block;text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-top:4px solid #D99A2B;border-radius:12px;padding:18px 18px 16px">
+        <a id="sub-2c" href="https://vipfahu.netlify.app/trayectorias" target="_blank" rel="noopener" style="display:block;text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-top:4px solid #D99A2B;border-radius:12px;padding:18px 18px 16px">
           <div style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">c · con cuenta de acceso</div>
           <div style="font:700 16px/1.25 Archivo,sans-serif;color:#24533D;margin-top:6px">Trayectorias académicas</div>
           <p style="font:400 13px/1.55 Spectral,serif;color:#46514B;margin:10px 0 0">Ficha de cada académica y académico: ingreso, jerarquía, hitos de jerarquización con sus respaldos y evaluación automática de los criterios de encasillamiento. Solo para la gestión interna.</p>
@@ -128,7 +242,7 @@ document.addEventListener('DOMContentLoaded',function(){g();new MutationObserver
 
       <div style="margin-top:26px;display:grid;grid-template-columns:1.2fr 1fr;gap:12px">
         <div style="background:#24533D;color:#fff;border-radius:12px;padding:20px 22px">
-          <div style="font:700 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;opacity:.75;margin-bottom:10px">Lo que ordena la plataforma</div>
+          <div style="font:700 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;opacity:.75;margin-bottom:10px">LA PLATAFORMA INTEGRA ACTUALMENTE</div>
           <div style="display:flex;flex-wrap:wrap;gap:7px">
             <span style="font:600 12px Archivo,sans-serif;background:rgba(255,255,255,.12);border-radius:999px;padding:6px 12px">Normativas actualizadas</span>
             <span style="font:600 12px Archivo,sans-serif;background:rgba(255,255,255,.12);border-radius:999px;padding:6px 12px">Cursos de formación multidisciplinar</span>
@@ -167,7 +281,7 @@ document.addEventListener('DOMContentLoaded',function(){g();new MutationObserver
                 <span style="width:9px;height:9px;border-radius:50%;background:#C9C2B0"></span>
                 <span style="flex:1;font:500 11px IBM Plex Mono,monospace;color:#5A6470;background:#F6F5EF;border-radius:6px;padding:4px 10px;margin-left:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">https://vipfahu.netlify.app</span>
               </div>
-              <img src="assets/img/bp-vip-portal.webp" alt="Portal Gestión de Información VIP" style="width:100%;display:block">
+              <img src="assets/img/bp-vip-portal.webp?v=1789133852447" alt="Portal Gestión de Información VIP" style="width:100%;display:block">
             </div>
             <div style="font:600 12px Archivo,sans-serif;color:#D99A2B;margin-top:10px">Abrir el portal →</div>
           </a>
@@ -176,30 +290,135 @@ document.addEventListener('DOMContentLoaded',function(){g();new MutationObserver
     </div>
   </section>
 
-  <!-- 02 -->
-  <section id="sec-2" class="section" data-screen-label="02 Relaciones y cifras" style="padding:80px clamp(28px,6vw,90px) 70px;box-sizing:border-box;border-top:1px solid #E5E1D4">
+  <!-- 03 -->
+  <section id="sec-3" class="section" data-screen-label="03 Investigación de estudiantes" style="padding:80px clamp(28px,6vw,90px) 70px;box-sizing:border-box;border-top:1px solid #E5E1D4">
     <div style="max-width:940px">
       <div style="display:flex;align-items:baseline;gap:18px;margin-bottom:14px">
-        <span style="font:800 clamp(44px,6vw,72px)/1 Archivo,sans-serif;color:#EAE6D9;-webkit-text-stroke:1.5px #2F6B4F">02</span>
+        <span style="font:800 clamp(44px,6vw,72px)/1 Archivo,sans-serif;color:#EAE6D9;-webkit-text-stroke:1.5px #2F6B4F">03</span>
+        <h2 style="font:800 clamp(26px,3.4vw,40px)/1.08 Archivo,sans-serif;color:#24533D;letter-spacing:-.01em;margin:0">Investigación de estudiantes</h2>
+      </div>
+      <div style="width:56px;height:5px;background:#D99A2B;border-radius:3px;margin-bottom:22px"></div>
+      <p style="font:400 15.5px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 14px">Doscientas cincuenta y siete tesis dirigidas entre 2024 y 2025 dan cuenta de las labores de investigación y desarrollo de los postgrados de la Facultad e IDEA. En esta síntesis queremos exponer los elementos que caracterizan al respecto a cada programa, qué líneas de investigación o desarrollo prevalecen, qué temas trata y en qué medida se vincula con proyectos de investigación con financiamiento.</p>
+      <p style="font:400 15.5px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 22px">En de cada subyace un trabajo intenso por parte de estudiantes, así como&nbsp;la labor de coordinación y seguimiento sostenido por los comités de cada programa, la composición de los cuerpos académicos (claustros, núcleos y profesorado colaborador). Asimismo, es fundamental la labor de los equipos de Biblioteca, que coordinan las instancias finales que hacen factible la adecuada visibilización de los trabajos que han sido aprobados. Las cifras aquí expresadas, han sido reconstruidas por estos equipos.</p>
+      <div style="display:grid;grid-template-columns:repeat(4, minmax(0,1fr));gap:14px;margin:0 0 24px;padding:20px 0;border-top:1px solid #E5E1D4;border-bottom:1px solid #E5E1D4">
+        <div><div style="font:600 26px IBM Plex Mono,monospace;color:#2F6B4F;letter-spacing:-.02em">257</div><div style="font:400 11.5px/1.35 Archivo,sans-serif;color:#8A8272;margin-top:2px">tesis dirigidas en 2024 y 2025</div></div>
+        <div><div style="font:600 26px IBM Plex Mono,monospace;color:#2F6B4F;letter-spacing:-.02em">14</div><div style="font:400 11.5px/1.35 Archivo,sans-serif;color:#8A8272;margin-top:2px">programas de magíster y doctorado</div></div>
+        <div><div style="font:600 26px IBM Plex Mono,monospace;color:#2F6B4F;letter-spacing:-.02em">81</div><div style="font:400 11.5px/1.35 Archivo,sans-serif;color:#8A8272;margin-top:2px">académicas y académicos guía</div></div>
+        <div><div style="font:600 26px IBM Plex Mono,monospace;color:#D99A2B;letter-spacing:-.02em">36</div><div style="font:400 11.5px/1.35 Archivo,sans-serif;color:#8A8272;margin-top:2px">tesis vinculadas a un proyecto</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:10px">
+        <a href="#sub-3a" style="display:block;text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-top:4px solid #2F6B4F;border-radius:10px;padding:14px 16px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">a</span><span style="display:block;font:700 14.5px/1.3 Archivo,sans-serif;color:#24533D;margin-top:4px">Tesis por programa</span></a>
+        <a href="#sub-3b" style="display:block;text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-top:4px solid #2F6B4F;border-radius:10px;padding:14px 16px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">b</span><span style="display:block;font:700 14.5px/1.3 Archivo,sans-serif;color:#24533D;margin-top:4px">Programas y líneas de investigación</span></a>
+        <a href="#sub-3c" style="display:block;text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-top:4px solid #2F6B4F;border-radius:10px;padding:14px 16px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">c</span><span style="display:block;font:700 14.5px/1.3 Archivo,sans-serif;color:#24533D;margin-top:4px">Principales temáticas por programa</span></a>
+        <a href="#sub-3d" style="display:block;text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-top:4px solid #2F6B4F;border-radius:10px;padding:14px 16px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">d</span><span style="display:block;font:700 14.5px/1.3 Archivo,sans-serif;color:#24533D;margin-top:4px">Tesis y proyectos de investigación</span></a>
+        <a href="#sub-3e" style="display:block;text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-top:4px solid #2F6B4F;border-radius:10px;padding:14px 16px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">e</span><span style="display:block;font:700 14.5px/1.3 Archivo,sans-serif;color:#24533D;margin-top:4px">Género en la escritura y la dirección de tesis</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3a -->
+  <section id="sub-3a" data-screen-label="3a Tesis por programa" style="padding:56px clamp(28px,6vw,90px) 60px;box-sizing:border-box">
+    <div style="max-width:940px">
+      <div style="font:600 10px Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D99A2B;margin-bottom:8px">03 · a</div>
+      <h3 style="font:800 clamp(20px,2.4vw,27px)/1.15 Archivo,sans-serif;color:#24533D;margin:0 0 12px">Tesis por programa</h3>
+      <p style="font:400 14.5px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 20px">La producción está concentrada: el Magíster en Educación mención Currículum y Evaluación reúne por sí solo una de cada cinco tesis del periodo, y los cinco programas mayores suman el 60% del total. La barra muestra la distribución por año de graduación.</p>
+      <div id="s4-prog"></div>
+    </div>
+  </section>
+
+  <!-- 3b -->
+  <section id="sub-3b" data-screen-label="3b Programas y líneas" style="padding:40px clamp(28px,6vw,90px) 60px;box-sizing:border-box">
+    <div style="max-width:940px">
+      <div style="font:600 10px Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D99A2B;margin-bottom:8px">03 · b</div>
+      <h3 style="font:800 clamp(20px,2.4vw,27px)/1.15 Archivo,sans-serif;color:#24533D;margin:0 0 12px">Programas y líneas de investigación</h3>
+      <p style="font:400 14.5px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 20px">Cada tesis hereda las líneas declaradas por su profesora o profesor guía. La matriz cruza ambas dimensiones: las líneas de historia, pensamiento y cultura atraviesan varios programas, mientras currículum, evaluación y epistemología se concentran en uno o dos.</p>
+      <div id="s4-matriz" style="width:100%;overflow-x:auto;padding-bottom:14px"></div>
+    </div>
+  </section>
+
+  <!-- 3c -->
+  <section id="sub-3c" data-screen-label="3c Principales temáticas" style="padding:40px clamp(28px,6vw,90px) 60px;box-sizing:border-box">
+    <div style="max-width:940px">
+      <div style="font:600 10px Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D99A2B;margin-bottom:8px">03 · c</div>
+      <h3 style="font:800 clamp(20px,2.4vw,27px)/1.15 Archivo,sans-serif;color:#24533D;margin:0 0 12px">Principales temáticas por programa</h3>
+      <p style="font:400 14.5px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 20px">Temas detectados sobre los títulos y resúmenes de las tesis. Una misma tesis puede tratar varios; el porcentaje indica qué proporción del programa aborda cada tema. Al no ser categorías excluyentes, la suma de los temas de un programa supera el 100%: no es una distribución, sino la cobertura de cada tema sobre el total de tesis del programa.</p>
+      <div id="s4-temas" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:10px"></div>
+    </div>
+  </section>
+
+  <!-- 3d -->
+  <section id="sub-3d" data-screen-label="3d Tesis y proyectos" style="padding:40px clamp(28px,6vw,90px) 70px;box-sizing:border-box">
+    <div style="max-width:940px">
+      <div style="font:600 10px Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D99A2B;margin-bottom:8px">03 · d</div>
+      <h3 style="font:800 clamp(20px,2.4vw,27px)/1.15 Archivo,sans-serif;color:#24533D;margin:0 0 12px">Tesis y proyectos de investigación</h3>
+      <p style="font:400 14.5px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 20px">Treinta y seis tesis declaran haberse desarrollado en el marco de un proyecto con financiamiento externo entre 2024 y 2025, distribuidas en 32 proyectos distintos. A continuación se expresa su frecuencia y los tipos de proyectos asociados.</p>
+      <div id="s4-proy"></div>
+      <p style="font:italic 400 12px/1.6 Spectral,serif;color:#8A8272;margin:32px 0 0;max-width:730px">Fuentes: registro de tesis con profesor guía del postgrado de la Facultad y registro de tesis del Instituto de Estudios Avanzados, acotados al periodo 2024–2026; los registros disponibles llegan hasta 2025, sin tesis con año de graduación 2026. Los registros comunes a ambos archivos se cruzaron por título; se excluyeron las tesis de programas ajenos a la Facultad y se unificaron las variantes de nombre de un mismo programa, incluidas sus menciones. Las líneas de investigación provienen del último campo del registro de postgrado, que consigna las líneas declaradas por cada profesor guía. Las temáticas se detectaron por palabras clave sobre título y resumen, de modo que una tesis puede contarse en más de una.</p>
+    </div>
+  </section>
+
+  <!-- 3e -->
+  <section id="sub-3e" data-screen-label="3e Género" style="padding:40px clamp(28px,6vw,90px) 70px;box-sizing:border-box">
+    <div style="max-width:940px">
+      <div style="font:600 10px Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D99A2B;margin-bottom:8px">03 · e</div>
+      <h3 style="font:800 clamp(20px,2.4vw,27px)/1.15 Archivo,sans-serif;color:#24533D;margin:0 0 12px">Género en la escritura y la dirección de tesis</h3>
+      <p style="font:400 14.5px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 20px">Las mujeres escriben una mayoría clara de las tesis del periodo y dirigen bastante menos de la mitad: son el 56% de quienes las firman y el 37% de las 78 personas que las guiaron. La diferencia se distribuye de diverso modo entre programas: en algunos la dirección es mayoritariamente femenina y&nbsp; en otros no figuran profesoras guía.</p>
+      <div style="display:grid;grid-template-columns:repeat(4, minmax(0,1fr));gap:14px;margin:0 0 24px;padding:20px 0;border-top:1px solid #E5E1D4;border-bottom:1px solid #E5E1D4">
+        <div><div style="font:600 26px IBM Plex Mono,monospace;color:#2F6B4F;letter-spacing:-.02em">56%</div><div style="font:400 11.5px/1.35 Archivo,sans-serif;color:#8A8272;margin-top:2px">de las tesis las escriben mujeres</div></div>
+        <div><div style="font:600 26px IBM Plex Mono,monospace;color:#D99A2B;letter-spacing:-.02em">37%</div><div style="font:400 11.5px/1.35 Archivo,sans-serif;color:#8A8272;margin-top:2px">de quienes dirigen son mujeres</div></div>
+        <div><div style="font:600 26px IBM Plex Mono,monospace;color:#2F6B4F;letter-spacing:-.02em">78</div><div style="font:400 11.5px/1.35 Archivo,sans-serif;color:#8A8272;margin-top:2px">profesoras y profesores guía</div></div>
+        <div><div style="font:600 26px IBM Plex Mono,monospace;color:#2F6B4F;letter-spacing:-.02em">253</div><div style="font:400 11.5px/1.35 Archivo,sans-serif;color:#8A8272;margin-top:2px">tesis con género identificado</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));gap:16px;align-items:start">
+        <div style="background:#fff;border:1px solid #E5E1D4;border-radius:12px;padding:18px 20px">
+          <div style="font:700 13px/1.3 Archivo,sans-serif;color:#24533D">Quién dirige, quién escribe</div>
+          <div style="font:400 11.5px/1.4 Archivo,sans-serif;color:#8A8272;margin:3px 0 14px">Cruce entre el género de la profesora o profesor guía y el de quien escribe la tesis</div>
+          <div id="s3g-mat"></div>
+        </div>
+        <div style="background:#fff;border:1px solid #E5E1D4;border-radius:12px;padding:18px 20px">
+          <div style="font:700 13px/1.3 Archivo,sans-serif;color:#24533D">Autoría por programa</div>
+          <div style="font:400 11.5px/1.4 Archivo,sans-serif;color:#8A8272;margin:3px 0 14px">Todos los programas con tesis en el periodo, de mayor a menor volumen</div>
+          <div id="s3g-prog"></div>
+        </div>
+      </div>
+      <div style="background:#fff;border:1px solid #E5E1D4;border-radius:12px;padding:18px 20px;margin-top:16px">
+        <div style="font:700 13px/1.3 Archivo,sans-serif;color:#24533D">Dirección femenina por programa</div>
+        <div style="font:400 11.5px/1.4 Archivo,sans-serif;color:#8A8272;margin:3px 0 14px">Proporción de las tesis de cada programa que fueron dirigidas por una profesora, sobre el promedio del periodo (43%)</div>
+        <div id="s3g-dir"></div>
+      </div>
+      <div style="background:#fff;border:1px solid #E5E1D4;border-radius:12px;padding:18px 20px;margin-top:16px">
+        <div style="font:700 13px/1.3 Archivo,sans-serif;color:#24533D">Temáticas y autoría vinculadas a dirección por mujeres</div>
+        <div style="font:400 11.5px/1.4 Archivo,sans-serif;color:#8A8272;margin:3px 0 14px">Género de quien dirige, según la temática principal de la tesis, en los temas con diez o más casos</div>
+        <div id="s3g-tem"></div>
+      </div>
+      <p style="font:italic 400 12px/1.6 Spectral,serif;color:#8A8272;margin:26px 0 0;max-width:730px">Fuente: registro de tesis con profesora o profesor guía 2024–2025 (253 tesis). El género de autoría y dirección fue inferido a partir del nombre de pila, por lo que se trata de una aproximación: una tesis quedó sin atribuir y los registros no recogen identidades de género declaradas por las propias personas. La temática principal corresponde a la clasificación única asignada a cada tesis en ese registro.</p>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section id="sec-4" class="section" data-screen-label="04 Relaciones y cifras" style="padding:80px clamp(28px,6vw,90px) 70px;box-sizing:border-box;border-top:1px solid #E5E1D4">
+    <div style="max-width:940px">
+      <div style="display:flex;align-items:baseline;gap:18px;margin-bottom:14px">
+        <span style="font:800 clamp(44px,6vw,72px)/1 Archivo,sans-serif;color:#EAE6D9;-webkit-text-stroke:1.5px #2F6B4F">04</span>
         <h2 style="font:800 clamp(26px,3.4vw,40px)/1.08 Archivo,sans-serif;color:#24533D;letter-spacing:-.01em;margin:0">Los postgrados en relaciones y cifras</h2>
       </div>
       <div style="width:56px;height:5px;background:#D99A2B;border-radius:3px;margin-bottom:22px"></div>
       <p style="font:400 15.5px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 26px">Quince programas, ocho unidades académicas y una comunidad que se renueva cada año. Las cifras de este apartado provienen de los registros de acreditación, matrícula y graduación de la Facultad entre 2024 y el primer semestre de 2026.</p>
       <div style="display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:8px">
-        <a href="#sub-2a" style="text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-radius:10px;padding:12px 14px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">a</span><span style="display:block;font:700 13px/1.3 Archivo,sans-serif;color:#24533D;margin-top:3px">Acreditación de programas</span></a>
-        <a href="#sub-2b" style="text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-radius:10px;padding:12px 14px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">b</span><span style="display:block;font:700 13px/1.3 Archivo,sans-serif;color:#24533D;margin-top:3px">Cómo se articulan académicos, unidades y programas</span></a>
-        <a href="#sub-2c" style="text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-radius:10px;padding:12px 14px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">c</span><span style="display:block;font:700 13px/1.3 Archivo,sans-serif;color:#24533D;margin-top:3px">Estudiantes articulados</span></a>
-        <a href="#sub-2d" style="text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-radius:10px;padding:12px 14px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">d</span><span style="display:block;font:700 13px/1.3 Archivo,sans-serif;color:#24533D;margin-top:3px">Matrícula de postgrado 2024–2026</span></a>
-        <a href="#sub-2e" style="text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-radius:10px;padding:12px 14px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">e</span><span style="display:block;font:700 13px/1.3 Archivo,sans-serif;color:#24533D;margin-top:3px">Expo Postgrados 2023–2025</span></a>
-        <a href="#sub-2f" style="text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-radius:10px;padding:12px 14px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">f</span><span style="display:block;font:700 13px/1.3 Archivo,sans-serif;color:#24533D;margin-top:3px">Graduados 2024–2026</span></a>
+        <a href="#sub-4a" style="text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-radius:10px;padding:12px 14px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">a</span><span style="display:block;font:700 13px/1.3 Archivo,sans-serif;color:#24533D;margin-top:3px">Acreditación de programas</span></a>
+        <a href="#sub-4b" style="text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-radius:10px;padding:12px 14px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">b</span><span style="display:block;font:700 13px/1.3 Archivo,sans-serif;color:#24533D;margin-top:3px">Cómo se articulan académicos, unidades y programas</span></a>
+        <a href="#sub-4c" style="text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-radius:10px;padding:12px 14px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">c</span><span style="display:block;font:700 13px/1.3 Archivo,sans-serif;color:#24533D;margin-top:3px">Estudiantes articulados</span></a>
+        <a href="#sub-4d" style="text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-radius:10px;padding:12px 14px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">d</span><span style="display:block;font:700 13px/1.3 Archivo,sans-serif;color:#24533D;margin-top:3px">Matrícula de postgrado 2024–2026</span></a>
+        <a href="#sub-4e" style="text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-radius:10px;padding:12px 14px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">e</span><span style="display:block;font:700 13px/1.3 Archivo,sans-serif;color:#24533D;margin-top:3px">Expo Postgrados 2023–2025</span></a>
+        <a href="#sub-4f" style="text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-radius:10px;padding:12px 14px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">f</span><span style="display:block;font:700 13px/1.3 Archivo,sans-serif;color:#24533D;margin-top:3px">Graduados 2024–2026</span></a>
       </div>
     </div>
   </section>
 
-  <!-- 2a -->
-  <section id="sub-2a" data-screen-label="2a Acreditación" style="padding:56px clamp(28px,6vw,90px) 60px;box-sizing:border-box">
+  <!-- 4a -->
+  <section id="sub-4a" data-screen-label="4a Acreditación" style="padding:56px clamp(28px,6vw,90px) 60px;box-sizing:border-box">
     <div style="max-width:940px">
-      <div style="font:600 10px Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D99A2B;margin-bottom:8px">02 · a</div>
+      <div style="font:600 10px Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D99A2B;margin-bottom:8px">04 · a</div>
       <h3 style="font:800 clamp(22px,2.6vw,30px)/1.15 Archivo,sans-serif;color:#24533D;margin:0 0 12px">Acreditación de programas</h3>
       <p style="font:400 15px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 22px">Doce de los quince programas cuentan hoy con acreditación vigente ante la Comisión Nacional de Acreditación, por períodos de entre tres y siete años. Otros tres programas se encuentran en proceso de autoevaluación, con ingreso al Comité de Evaluación de Programas de Postgrado (CEPP) previsto para fines de 2026 y presentación ante la CNA en 2027.</p>
       <div style="display:grid;grid-template-columns:repeat(4, minmax(0,1fr));gap:14px;padding:18px 0;border-top:1px solid #E5E1D4;border-bottom:1px solid #E5E1D4;margin-bottom:26px">
@@ -234,10 +453,10 @@ document.addEventListener('DOMContentLoaded',function(){g();new MutationObserver
     </div>
   </section>
 
-  <!-- 2b -->
-  <section id="sub-2b" data-screen-label="2b Articulación" style="padding:56px clamp(28px,6vw,90px) 60px;box-sizing:border-box">
+  <!-- 4b -->
+  <section id="sub-4b" data-screen-label="4b Articulación" style="padding:56px clamp(28px,6vw,90px) 60px;box-sizing:border-box">
     <div style="max-width:940px">
-      <div style="font:600 10px Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D99A2B;margin-bottom:8px">02 · b</div>
+      <div style="font:600 10px Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D99A2B;margin-bottom:8px">04 · b</div>
       <h3 style="font:800 clamp(22px,2.6vw,30px)/1.15 Archivo,sans-serif;color:#24533D;margin:0 0 12px">Cómo se articulan académicos, unidades y programas</h3>
       <p style="font:400 15px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 18px">Las resoluciones de designación de cada programa de postgrado nombran a su directora o director, su comité y su cuerpo académico completo. Leídas en conjunto muestran una trama: los mismos investigadores sostienen varios programas a la vez. El diagrama considera a quienes tienen unidad identificada: los departamentos y escuelas de la Facultad y el Instituto de Estudios Avanzados.</p>
 
@@ -276,12 +495,13 @@ document.addEventListener('DOMContentLoaded',function(){g();new MutationObserver
     </div>
   </section>
 
-  <!-- 2c -->
-  <section id="sub-2c" data-screen-label="2c Estudiantes articulados" style="padding:56px clamp(28px,6vw,90px) 60px;box-sizing:border-box">
+  <!-- 4c -->
+  <section id="sub-4c" data-screen-label="4c Estudiantes articulados" style="padding:56px clamp(28px,6vw,90px) 60px;box-sizing:border-box">
     <div style="max-width:940px">
-      <div style="font:600 10px Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D99A2B;margin-bottom:8px">02 · c</div>
+      <div style="font:600 10px Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D99A2B;margin-bottom:8px">04 · c</div>
       <h3 style="font:800 clamp(22px,2.6vw,30px)/1.15 Archivo,sans-serif;color:#24533D;margin:0 0 12px">Estudiantes articulados</h3>
-      <p style="font:400 15px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 24px">La articulación permite que un estudiante curse de manera continua dos niveles formativos: de una licenciatura o título profesional a un magíster, o de un magíster a un doctorado. Quince estudiantes recorren hoy alguna de las tres vías activas; la cuarta —del Magíster al Doctorado en Historia— aún no registra casos.</p>
+      <p style="font:400 15px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 24px">La articulación permite que un estudiante curse de manera continua dos niveles formativos: de una licenciatura o título profesional a un magíster, o de un magíster a un doctorado. Quince estudiantes recorren hoy alguna de las tres vías activas; la cuarta, de reciente formalización entre el Magíster en Historia y el&nbsp; Doctorado en Historia, se encuentra aún en proceso.</p>
+      <div id="s4-artic" style="background:#fff;border:1px solid #E5E1D4;border-radius:12px;padding:20px 22px 16px;margin-bottom:16px"></div>
       <div style="display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:12px">
         <div style="background:#fff;border:1px solid #E5E1D4;border-radius:12px;padding:18px 20px;display:grid;grid-template-columns:1fr 34px 1fr;gap:10px;align-items:center">
           <div><div style="font:400 10.5px Archivo,sans-serif;color:#8A8272;text-transform:uppercase;letter-spacing:.1em">Origen</div><div style="font:700 13.5px/1.3 Archivo,sans-serif;color:#24533D;margin-top:3px">Magíster en Arte, Pensamiento y Cultura Latinoamericanos</div></div>
@@ -314,10 +534,10 @@ document.addEventListener('DOMContentLoaded',function(){g();new MutationObserver
     </div>
   </section>
 
-  <!-- 2d -->
-  <section id="sub-2d" data-screen-label="2d Matrícula" style="padding:56px clamp(28px,6vw,90px) 60px;box-sizing:border-box">
+  <!-- 4d -->
+  <section id="sub-4d" data-screen-label="4d Matrícula" style="padding:56px clamp(28px,6vw,90px) 60px;box-sizing:border-box">
     <div style="max-width:940px">
-      <div style="font:600 10px Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D99A2B;margin-bottom:8px">02 · d</div>
+      <div style="font:600 10px Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D99A2B;margin-bottom:8px">04 · d</div>
       <h3 style="font:800 clamp(22px,2.6vw,30px)/1.15 Archivo,sans-serif;color:#24533D;margin:0 0 12px">Matrícula de postgrado 2024–2026</h3>
       <p style="font:400 15px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 22px">Entre 2024 y el primer semestre de 2026 ingresaron 354 estudiantes nuevos a los programas de la Facultad y del IDEA. El salto de 2025 coincide con la apertura del Doctorado en Artes y Humanidades y con la admisión anual de todos los magísteres; los dos programas con ingreso en segundo semestre —Gestión y Liderazgo Educacional y Estudios Internacionales— explican los ingresos de 2024-2 y 2025-2.</p>
       <div style="display:grid;grid-template-columns:repeat(4, minmax(0,1fr));gap:14px;padding:18px 0;border-top:1px solid #E5E1D4;border-bottom:1px solid #E5E1D4;margin-bottom:26px">
@@ -334,10 +554,39 @@ document.addEventListener('DOMContentLoaded',function(){g();new MutationObserver
     </div>
   </section>
 
-  <!-- 2e -->
-  <section id="sub-2e" data-screen-label="2e Expo Postgrados" style="padding:56px clamp(28px,6vw,90px) 60px;box-sizing:border-box">
+  <!-- puente 4d → 4e -->
+  <div style="padding:0 clamp(28px,6vw,90px) 10px;box-sizing:border-box">
     <div style="max-width:940px">
-      <div style="font:600 10px Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D99A2B;margin-bottom:8px">02 · e</div>
+      <div data-puente="1" style="display:grid;grid-template-columns:minmax(0,1fr) 124px minmax(0,1fr);align-items:stretch;background:#fff;border:1px solid #E5E1D4;border-radius:14px;overflow:hidden">
+        <div style="padding:18px 22px;border-right:1px solid #E5E1D4">
+          <div style="font:600 10px Archivo,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8A8272">04 · d · lo que muestran las cifras</div>
+          <div style="display:flex;align-items:baseline;gap:10px;margin-top:8px">
+            <span style="font:600 30px/1 IBM Plex Mono,monospace;color:#24533D">354</span>
+            <span style="font:400 13px/1.35 Spectral,serif;color:#46514B">ingresos entre 2024 y el primer semestre de 2026</span>
+          </div>
+        </div>
+        <div data-puente-flecha="1" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px 8px;background:#F1EFE8">
+          <svg viewBox="0 0 120 46" style="width:112px;height:auto;display:block" aria-hidden="true">
+            <path d="M104,16 C82,16 80,6 60,6 C40,6 38,16 16,16" fill="none" stroke="#D99A2B" stroke-width="2.4" stroke-linecap="round"></path>
+            <path d="M22,10 L13,16 L22,22" fill="none" stroke="#D99A2B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M16,30 C38,30 40,40 60,40 C80,40 82,30 104,30" fill="none" stroke="#2F6B4F" stroke-width="2.4" stroke-linecap="round"></path>
+            <path d="M98,24 L107,30 L98,36" fill="none" stroke="#2F6B4F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <div style="padding:18px 22px;border-left:1px solid #E5E1D4">
+          <div style="font:600 10px Archivo,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#D99A2B">04 · e · lo que hacemos para sostenerlas</div>
+          <div style="font:700 15px/1.3 Archivo,sans-serif;color:#24533D;margin-top:8px">Expo Postgrados USACH, 2023–2025</div>
+          <div style="font:400 13px/1.45 Spectral,serif;color:#46514B;margin-top:4px">Stands informativos, orientación sobre matrícula, aranceles y becas, y mediación cultural con la línea editorial FAHU.</div>
+        </div>
+      </div>
+      <div style="font:italic 400 12px/1.5 Spectral,serif;color:#8A8272;margin-top:10px">La difusión en terreno es la principal vía de captación detrás de estas cifras: lo que 04 · d cuenta, 04 · e lo explica.</div>
+    </div>
+  </div>
+
+  <!-- 4e -->
+  <section id="sub-4e" data-screen-label="4e Expo Postgrados" style="padding:56px clamp(28px,6vw,90px) 60px;box-sizing:border-box">
+    <div style="max-width:940px">
+      <div style="font:600 10px Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D99A2B;margin-bottom:8px">04 · e</div>
       <h3 style="font:800 clamp(22px,2.6vw,30px)/1.15 Archivo,sans-serif;color:#24533D;margin:0 0 6px">Presencia en terreno: la Expo Postgrados USACH</h3>
       <div style="font:italic 400 15px/1.5 Spectral,serif;color:#8A8272;margin-bottom:18px">Una trayectoria de liderazgo, soporte y mediación cultural, 2023–2025</div>
       <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:26px;align-items:start">
@@ -347,10 +596,10 @@ document.addEventListener('DOMContentLoaded',function(){g();new MutationObserver
           <p style="font:400 15px/1.65 Spectral,serif;color:#46514B;margin:0">El protagonismo de la biblioteca también ha destacado en el plano logístico y de contenidos en hitos específicos en distintas versiones de la feria:</p>
         </div>
         <div style="display:grid;gap:10px">
-          <img src="assets/img/bp-expo-portico.webp" alt="Pórtico de la 3.ª Expo Postgrados 2025" data-zoom="pie" style="width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
+          <img src="assets/img/bp-expo-portico.webp?v=1789133852447" alt="Pórtico de la 3.ª Expo Postgrados 2025" data-zoom="pie" style="width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-            <img src="assets/img/bp-expo-b.webp" alt="Afiches de la 3.ª Expo Postgrados 2025" data-zoom="pie" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
-            <img src="assets/img/bp-expo-c.webp" alt="Usachín con postulantes en la Expo" data-zoom="pie" style="width:100%;aspect-ratio:4/5;object-fit:cover;object-position:60% 50%;border-radius:10px;display:block;cursor:zoom-in">
+            <img src="assets/img/bp-expo-b.webp?v=1789133852447" alt="Afiches de la 3.ª Expo Postgrados 2025" data-zoom="pie" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
+            <img src="assets/img/bp-expo-c.webp?v=1789133852447" alt="Usachín con postulantes en la Expo" data-zoom="pie" style="width:100%;aspect-ratio:4/5;object-fit:cover;object-position:60% 50%;border-radius:10px;display:block;cursor:zoom-in">
           </div>
         </div>
       </div>
@@ -368,15 +617,15 @@ document.addEventListener('DOMContentLoaded',function(){g();new MutationObserver
       </div>
       <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:22px;align-items:center;margin-top:22px">
         <p style="font:400 15px/1.65 Spectral,serif;color:#46514B;margin:0">Con este recorrido, la Biblioteca FAHU reafirma que su compromiso con el postgrado es una labor sostenida en el tiempo, aportando tanto soporte técnico como mediación cultural en cada edición de este gran encuentro universitario.</p>
-        <video controls="" preload="metadata" playsinline="" style="width:100%;border-radius:10px;background:#000;display:block" src="assets/video/bp-expo-2025.mp4"></video>
+        <video controls="" preload="metadata" playsinline="" style="width:100%;border-radius:10px;background:#000;display:block" src="assets/video/bp-expo-2025.mp4?v=1789133852447"></video>
       </div>
     </div>
   </section>
 
-  <!-- 2f -->
-  <section id="sub-2f" data-screen-label="2f Graduados" style="padding:56px clamp(28px,6vw,90px) 60px;box-sizing:border-box">
+  <!-- 4f -->
+  <section id="sub-4f" data-screen-label="4f Graduados" style="padding:56px clamp(28px,6vw,90px) 60px;box-sizing:border-box">
     <div style="max-width:940px">
-      <div style="font:600 10px Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D99A2B;margin-bottom:8px">02 · f</div>
+      <div style="font:600 10px Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#D99A2B;margin-bottom:8px">04 · f</div>
       <h3 style="font:800 clamp(22px,2.6vw,30px)/1.15 Archivo,sans-serif;color:#24533D;margin:0 0 12px">Graduados 2024–2026</h3>
       <p style="font:400 15px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 22px">Trescientos seis grados de magíster y doctor se tramitaron entre enero de 2024 y agosto de 2026: alrededor de cien por año. Los programas de Educación y los doctorados en Estudios Americanos y en Historia concentran la mayor parte; desde 2025 el registro incorpora el sexo de las personas graduadas, con una mayoría de mujeres.</p>
       <div style="display:grid;grid-template-columns:repeat(4, minmax(0,1fr));gap:14px;padding:18px 0;border-top:1px solid #E5E1D4;border-bottom:1px solid #E5E1D4;margin-bottom:26px">
@@ -400,87 +649,6 @@ document.addEventListener('DOMContentLoaded',function(){g();new MutationObserver
           <div id="s2-grado"></div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- 03 -->
-  <section id="sec-3" class="section" data-screen-label="03 Consejo regular" style="padding:80px clamp(28px,6vw,90px) 70px;box-sizing:border-box;border-top:1px solid #E5E1D4">
-    <div style="max-width:940px">
-      <div style="display:flex;align-items:baseline;gap:18px;margin-bottom:14px">
-        <span style="font:800 clamp(44px,6vw,72px)/1 Archivo,sans-serif;color:#EAE6D9;-webkit-text-stroke:1.5px #2F6B4F">03</span>
-        <h2 style="font:800 clamp(26px,3.4vw,40px)/1.08 Archivo,sans-serif;color:#24533D;letter-spacing:-.01em;margin:0">Un Consejo regular</h2>
-      </div>
-      <div style="width:56px;height:5px;background:#D99A2B;border-radius:3px;margin-bottom:22px"></div>
-      <p style="font:400 15.5px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 14px">Por resolución de la Decana Dra. Cristina Moyano Barahona (STD N.º 23694/2026), la Facultad de Humanidades creó el <strong style="font-weight:600;color:#24533D">Consejo de Postgrados</strong>, bajo la dependencia técnica y administrativa del Vicedecanato de Investigación y Postgrado. Es una instancia colegiada de articulación, coordinación y gestión interna: un espacio consultivo y de coordinación operativa para canalizar y ejecutar, junto con las unidades académicas, las políticas de la Facultad en materia de postgrado.</p>
-      <p style="font:400 15.5px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 30px">La resolución responde a la obligatoriedad de acreditación de los doctorados que fija la Ley 21.091, a los criterios de la CNA —que exigen mecanismos sistemáticos de autorregulación, seguimiento curricular y progresión estudiantil— y al Plan de Desarrollo Estratégico de la Facultad, que prioriza la mejora continua de sus programas.</p>
-
-      <div style="display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:12px">
-        <div style="background:#24533D;color:#fff;border-radius:12px;padding:20px 22px">
-          <div style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">Preside</div>
-          <div style="font:700 16px/1.25 Archivo,sans-serif;margin-top:6px">Vicedecana/o de Investigación y Postgrado</div>
-          <p style="font:400 13px/1.55 Spectral,serif;opacity:.85;margin:10px 0 0">Preside y guía la articulación del Consejo para todos los efectos.</p>
-        </div>
-        <div style="background:#fff;border:1px solid #E5E1D4;border-radius:12px;padding:20px 22px">
-          <div style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">Integrantes regulares</div>
-          <div style="font:700 16px/1.25 Archivo,sans-serif;color:#24533D;margin-top:6px">Direcciones de los 15 programas</div>
-          <p style="font:400 13px/1.55 Spectral,serif;color:#46514B;margin:10px 0 0">O las coordinaciones que determine la autoridad. A solicitud del Vicedecanato, participan de modo regular quienes prestan apoyo administrativo a los programas.</p>
-        </div>
-        <div style="background:#fff;border:1px solid #E5E1D4;border-radius:12px;padding:20px 22px">
-          <div style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">Invitadas/os</div>
-          <div style="font:700 16px/1.25 Archivo,sans-serif;color:#24533D;margin-top:6px">Agentes internos y externos</div>
-          <p style="font:400 13px/1.55 Spectral,serif;color:#46514B;margin:10px 0 0">Convocados a sesiones específicas cuando su participación se vincula a los propósitos del Consejo.</p>
-        </div>
-      </div>
-
-      <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:12px;margin-top:12px">
-        <div style="background:#fff;border:1px solid #E5E1D4;border-radius:12px;padding:20px 22px">
-          <div style="font:700 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#2F6B4F;margin-bottom:12px">Propósito</div>
-          <div style="display:flex;flex-wrap:wrap;gap:7px">
-            <span style="font:600 12px Archivo,sans-serif;color:#24533D;background:#F1EFE8;border-radius:999px;padding:6px 12px">Articulación del desarrollo académico</span>
-            <span style="font:600 12px Archivo,sans-serif;color:#24533D;background:#F1EFE8;border-radius:999px;padding:6px 12px">Aseguramiento de la calidad</span>
-            <span style="font:600 12px Archivo,sans-serif;color:#24533D;background:#F1EFE8;border-radius:999px;padding:6px 12px">Mejoramiento continuo</span>
-            <span style="font:600 12px Archivo,sans-serif;color:#24533D;background:#F1EFE8;border-radius:999px;padding:6px 12px">Acreditación</span>
-            <span style="font:600 12px Archivo,sans-serif;color:#24533D;background:#F1EFE8;border-radius:999px;padding:6px 12px">Seguimiento curricular</span>
-            <span style="font:600 12px Archivo,sans-serif;color:#24533D;background:#F1EFE8;border-radius:999px;padding:6px 12px">Vinculación estratégica</span>
-          </div>
-          <p style="font:400 13px/1.55 Spectral,serif;color:#8A8272;margin:14px 0 0">En concordancia con los Criterios y Estándares de la CNA-Chile, para los programas de magíster y doctorado administrados académicamente por la Facultad.</p>
-        </div>
-        <div style="background:#fff;border:1px solid #E5E1D4;border-radius:12px;padding:20px 22px">
-          <div style="font:700 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#2F6B4F;margin-bottom:12px">Régimen de sesiones</div>
-          <div style="display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:8px">
-            <div style="text-align:center;background:#F1EFE8;border-radius:10px;padding:12px 6px"><div style="font:600 24px/1 IBM Plex Mono,monospace;color:#24533D">1</div><div style="font:400 11px/1.35 Archivo,sans-serif;color:#8A8272;margin-top:5px">sesión ordinaria al mes, en lo posible</div></div>
-            <div style="text-align:center;background:#F1EFE8;border-radius:10px;padding:12px 6px"><div style="font:600 24px/1 IBM Plex Mono,monospace;color:#24533D">≥2</div><div style="font:400 11px/1.35 Archivo,sans-serif;color:#8A8272;margin-top:5px">sesiones registradas por semestre</div></div>
-            <div style="text-align:center;background:#F1EFE8;border-radius:10px;padding:12px 6px"><div style="font:600 24px/1 IBM Plex Mono,monospace;color:#D99A2B">+</div><div style="font:400 11px/1.35 Archivo,sans-serif;color:#8A8272;margin-top:5px">extraordinarias por convocatoria o mayoría</div></div>
-          </div>
-        </div>
-      </div>
-      <p style="font:italic 400 12.5px/1.6 Spectral,serif;color:#8A8272;margin:14px 0 0">Coordinación permanente entre el Vicedecanato, las direcciones de programa, los departamentos y escuelas, el IDEA y la Vicerrectoría de Postgrado. La vigencia de la integración se mantiene mientras dure el nombramiento de sus integrantes.</p>
-    </div>
-  </section>
-
-  <!-- 04 -->
-  <section id="sec-4" class="section" data-screen-label="04 Investigación de estudiantes" style="padding:80px clamp(28px,6vw,90px) 70px;box-sizing:border-box;border-top:1px solid #E5E1D4">
-    <div style="max-width:940px">
-      <div style="display:flex;align-items:baseline;gap:18px;margin-bottom:14px">
-        <span style="font:800 clamp(44px,6vw,72px)/1 Archivo,sans-serif;color:#EAE6D9;-webkit-text-stroke:1.5px #2F6B4F">04</span>
-        <h2 style="font:800 clamp(26px,3.4vw,40px)/1.08 Archivo,sans-serif;color:#24533D;letter-spacing:-.01em;margin:0">Investigación de estudiantes</h2>
-      </div>
-      <div style="width:56px;height:5px;background:#D99A2B;border-radius:3px;margin-bottom:22px"></div>
-      <p style="font:400 15.5px/1.65 Spectral,serif;color:#46514B;max-width:720px;margin:0 0 22px">Seiscientas trece tesis dirigidas entre 2020 y 2025 permiten ver qué investiga el postgrado de la Facultad y del IDEA, quiénes guían ese trabajo, cómo se distribuye por género y en qué medida se vincula con proyectos de investigación con financiamiento.</p>
-      <a href="tesis.html" style="display:grid;grid-template-columns:1fr 1.2fr;gap:18px;align-items:center;text-decoration:none;background:#fff;border:1px solid #E5E1D4;border-radius:12px;padding:20px 22px">
-        <div>
-          <div style="font:700 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#2F6B4F">Página paralela</div>
-          <div style="font:700 17px/1.25 Archivo,sans-serif;color:#24533D;margin-top:6px">Tesis de postgrado 2020–2025</div>
-          <div style="font:600 12px Archivo,sans-serif;color:#D99A2B;margin-top:12px">Abrir la página →</div>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:8px">
-          <div id="sub-4a" style="background:#F1EFE8;border-radius:8px;padding:10px 12px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">a</span><span style="display:block;font:600 12.5px/1.3 Archivo,sans-serif;color:#24533D;margin-top:2px">Tesis de estudiantes por programa</span></div>
-          <div id="sub-4b" style="background:#F1EFE8;border-radius:8px;padding:10px 12px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">b</span><span style="display:block;font:600 12.5px/1.3 Archivo,sans-serif;color:#24533D;margin-top:2px">Género</span></div>
-          <div id="sub-4c" style="background:#F1EFE8;border-radius:8px;padding:10px 12px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">c</span><span style="display:block;font:600 12.5px/1.3 Archivo,sans-serif;color:#24533D;margin-top:2px">Vínculo a proyectos de investigación</span></div>
-          <div id="sub-4d" style="background:#F1EFE8;border-radius:8px;padding:10px 12px"><span style="font:600 10.5px IBM Plex Mono,monospace;color:#D99A2B">d</span><span style="display:block;font:600 12.5px/1.3 Archivo,sans-serif;color:#24533D;margin-top:2px">Principales temáticas</span></div>
-        </div>
-      </a>
-      <p style="font:italic 400 12.5px/1.6 Spectral,serif;color:#8A8272;margin:12px 0 0">Esta página se insertará en el cuerpo del boletín cuando indiques su ubicación definitiva.</p>
     </div>
   </section>
 
@@ -510,19 +678,19 @@ document.addEventListener('DOMContentLoaded',function(){g();new MutationObserver
           <p style="font:400 15px/1.65 Spectral,serif;color:#46514B;margin:0">Hasta el momento, el proyecto ha contado con dos volúmenes y dos propuestas musicales invitadas. El primer encuentro tuvo como protagonista a Allegro, músico vinculado al sello en el que participa el estudiante. En la segunda edición, el espacio recibió a Rebeldes con Causa, agrupación integrada por estudiantes de la carrera de Historia de la Facultad de Humanidades. De esta forma, la actividad ha permitido reunir tanto a artistas vinculados a circuitos musicales independientes como a integrantes de la propia comunidad universitaria.</p>
         </div>
         <div style="display:grid;gap:10px">
-          <img src="assets/img/bp-5a-afiche.webp" alt="Identidad gráfica de Entre estanterías y acordes" data-zoom="pie" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
+          <img src="assets/img/bp-5a-afiche.webp?v=1789133852447" alt="Identidad gráfica de Entre estanterías y acordes" data-zoom="pie" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
           <div style="display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:10px">
-            <div><img src="assets/img/bp-5a-allegro.webp" alt="Allegro, vol. 1" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in"><div style="font:600 11px Archivo,sans-serif;color:#8A8272;margin-top:5px">Vol. 1 · Allegro</div></div>
-            <div><img src="assets/img/bp-5a-rebeldes.webp" alt="Rebeldes con Causa, vol. 2" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 35%;border-radius:10px;display:block;cursor:zoom-in"><div style="font:600 11px Archivo,sans-serif;color:#8A8272;margin-top:5px">Vol. 2 · Rebeldes con Causa</div></div>
+            <div><img src="assets/img/bp-5a-allegro.webp?v=1789133852447" alt="Allegro, vol. 1" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in"><div style="font:600 11px Archivo,sans-serif;color:#8A8272;margin-top:5px">Vol. 1 · Allegro</div></div>
+            <div><img src="assets/img/bp-5a-rebeldes.webp?v=1789133852447" alt="Rebeldes con Causa, vol. 2" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 35%;border-radius:10px;display:block;cursor:zoom-in"><div style="font:600 11px Archivo,sans-serif;color:#8A8272;margin-top:5px">Vol. 2 · Rebeldes con Causa</div></div>
           </div>
         </div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:26px;align-items:start;margin-top:26px">
         <div style="display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:10px">
-          <img src="assets/img/bp-5a-wa.webp" alt="Sesión acústica en la biblioteca" data-zoom="pie" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
+          <img src="assets/img/bp-5a-wa.webp?v=1789133852447" alt="Sesión acústica en la biblioteca" data-zoom="pie" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
           <div style="display:grid;gap:10px">
-            <img src="assets/img/bp-5a-dji-0313.webp" alt="Público en la biblioteca" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
-            <img src="assets/img/bp-5a-dji-0309.webp" alt="Ambientación con objetos" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
+            <img src="assets/img/bp-5a-dji-0313.webp?v=1789133852447" alt="Público en la biblioteca" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
+            <img src="assets/img/bp-5a-dji-0309.webp?v=1789133852447" alt="Ambientación con objetos" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
           </div>
         </div>
         <div>
@@ -545,7 +713,7 @@ document.addEventListener('DOMContentLoaded',function(){g();new MutationObserver
       <h3 style="font:800 clamp(22px,2.6vw,30px)/1.15 Archivo,sans-serif;color:#24533D;margin:0 0 4px">Feria del Libro FAHU 2026</h3>
       <div style="font:italic 400 14px Spectral,serif;color:#8A8272;margin-bottom:20px">Iniciativa de Franco Fuentes · 22 y 23 de abril de 2026 · Mes del Libro</div>
       <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:26px;align-items:start">
-        <img src="assets/img/bp-5b-afiche.webp" alt="Afiche de la Feria del Libro FAHU 2026" data-zoom="pie" style="width:100%;border-radius:10px;display:block;cursor:zoom-in">
+        <img src="assets/img/bp-5b-afiche.webp?v=1789133852447" alt="Afiche de la Feria del Libro FAHU 2026" data-zoom="pie" style="width:100%;border-radius:10px;display:block;cursor:zoom-in">
         <div>
           <p style="font:400 15px/1.65 Spectral,serif;color:#46514B;margin:0 0 14px">La propuesta fue impulsada por Franco, estudiante del Magíster en Literatura, quien a partir de su participación en la editorial independiente Inti, se acercó a Biblioteca FAHU con la idea de organizar una Feria que permitiera visibilizar el trabajo de distintas editoriales independientes y acercar sus publicaciones a la comunidad universitaria, democratizando el acceso al libro y la cultura.</p>
           <p style="font:400 15px/1.65 Spectral,serif;color:#46514B;margin:0 0 14px">A partir de esta propuesta, la biblioteca FAHU trabajó junto a Franco en la organización de la actividad logrando reunir a más de 20 editoriales independientes y universitarias, entre ellas LOM, Odisea, Editorial USACH, La Parada Poética, Las Ekfrasistas, Antu, Noctámbula, Inti, entre otras. De esta manera, la feria se transformó en un espacio para conocer diversas propuestas editoriales y acercarse a distintas expresiones de la Literatura contemporánea.</p>
@@ -558,12 +726,12 @@ document.addEventListener('DOMContentLoaded',function(){g();new MutationObserver
         </div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:10px;margin-top:22px">
-        <img src="assets/img/bp-5b-cap-093602.webp" alt="Stands de editoriales" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
-        <img src="assets/img/bp-5b-cap-093632.webp" alt="Público en la feria" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
-        <img src="assets/img/bp-5b-foto-6.webp" alt="Conversatorio de autores jóvenes" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
-        <img src="assets/img/bp-5b-foto-5.webp" alt="Mes del Libro en la Biblioteca FAHU" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
-        <img src="assets/img/bp-5b-foto-2.webp" alt="Taller de escritura con imágenes" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
-        <img src="assets/img/bp-5b-foto-3.webp" alt="Letrero de la Feria del Libro FAHU" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 30%;border-radius:10px;display:block;cursor:zoom-in">
+        <img src="assets/img/bp-5b-cap-093602.webp?v=1789133852447" alt="Stands de editoriales" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
+        <img src="assets/img/bp-5b-cap-093632.webp?v=1789133852447" alt="Público en la feria" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
+        <img src="assets/img/bp-5b-foto-6.webp?v=1789133852447" alt="Conversatorio de autores jóvenes" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
+        <img src="assets/img/bp-5b-foto-5.webp?v=1789133852447" alt="Mes del Libro en la Biblioteca FAHU" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
+        <img src="assets/img/bp-5b-foto-2.webp?v=1789133852447" alt="Taller de escritura con imágenes" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block;cursor:zoom-in">
+        <img src="assets/img/bp-5b-foto-3.webp?v=1789133852447" alt="Letrero de la Feria del Libro FAHU" data-zoom="pie" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 30%;border-radius:10px;display:block;cursor:zoom-in">
       </div>
       <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:22px;align-items:start;margin-top:22px">
         <p style="font:400 15px/1.65 Spectral,serif;color:#46514B;margin:0">Para la Biblioteca FAHU, esta experiencia representa también una oportunidad para fortalecer su vínculo con las iniciativas que surgen desde los programas de posgrado y sus estudiantes. Más allá de su función como espacio de acceso a recursos bibliográficos, la biblioteca busca consolidarse como un lugar de encuentro para la comunidad, donde la literatura, la cultura y el diálogo puedan ocupar un espacio activo dentro de la vida universitaria.</p>
@@ -603,13 +771,19 @@ class Component extends DCLogic {
   async componentDidMount() {
     this.tip = this.mkTip();
     this.initZoom();
-    try { this.D = (await import('./data/boletin-postgrados/datos.js?v=1788890171399')).D; }
+    this.artic();
+    this.genero();
+    try { this.D = (await import('./data/boletin-postgrados/datos.js?v=1789133852447')).D; }
     catch (e) { console.warn('No se pudieron cargar los datos del boletín', e); return; }
     this.acred(); this.acredTabla(); this.matricula(); this.graduados();
     try {
-      this.art = (await import('./data/red/articulacion.js?v=1788890171399')).DATA;
+      this.art = (await import('./data/red/articulacion.js?v=1789133852447')).DATA;
       this.aSankey(); this.aComposicion(); this.aDirs(); this.aListado(); this.aRed();
     } catch (e) { console.warn('No se pudieron cargar los datos de articulación', e); }
+    try {
+      this.T = (await import('./data/tesis/sintesis-2024-2026.js?v=1789133852447')).S;
+      this.tPrograma(); this.tMatriz(); this.tTemas(); this.tProyectos();
+    } catch (e) { console.warn('No se pudo cargar la síntesis de tesis', e); }
   }
 
   ASHORT = {
@@ -885,6 +1059,317 @@ class Component extends DCLogic {
     });
   }
   fmt(iso) { if (!iso) return ''; const [y, m, d] = iso.split('-'); return `${d}-${m}-${y}`; }
+
+  ARTIC = [
+    { o: "Magíster en Arte, Pensamiento y Cultura Latinoamericanos", d: "Doctorado en Artes y Humanidades", y: { "2025": 7, "2026": 3 }, c: "#2F6B4F" },
+    { o: "Periodismo", d: "Magíster en Ciencias de la Comunicación", y: { "2024": 3, "2025": 1 }, c: "#5E9578" },
+    { o: "Licenciatura en Historia", d: "Magíster en Historia", y: { "2025": 1 }, c: "#8FA98F" },
+    { o: "Magíster en Historia", d: "Doctorado en Historia", y: {}, c: "#B9B09A" }
+  ];
+  articAnio = "todos";
+
+  artic() {
+    const host = document.getElementById('s4-artic'); if (!host) return;
+    const anios = ["2024", "2025", "2026"];
+    const filtro = this.articAnio;
+    const n = v => filtro === 'todos' ? Object.values(v.y).reduce((a, b) => a + b, 0) : (v.y[filtro] || 0);
+    const flujos = this.ARTIC.map(v => ({ ...v, n: n(v) }));
+    const total = flujos.reduce((a, v) => a + v.n, 0);
+    const activos = flujos.filter(v => v.n > 0).length;
+
+    const wrap = (t, max) => {
+      const out = []; let l = '';
+      t.split(' ').forEach(w => { if ((l + ' ' + w).trim().length > max) { out.push(l.trim()); l = w; } else l += ' ' + w; });
+      if (l.trim()) out.push(l.trim());
+      return out;
+    };
+    const W = 940, PAD = 26, BAR = 11, LX = 250, RX = W - 250;
+    const nodos = lado => {
+      const m = new Map();
+      flujos.forEach(v => { const k = lado === 'o' ? v.o : v.d; const e = m.get(k) || { k, n: 0, vs: [] }; e.n += v.n; e.vs.push(v); m.set(k, e); });
+      return [...m.values()];
+    };
+    const alto = x => Math.max(24, x * 5.4);
+    const col = (arr, y0) => { let y = y0; return arr.map(e => { const h = alto(e.n); const o = { ...e, y, h }; y += h + 26; return o; }); };
+    const L = nodos('o'), R = nodos('d');
+    const hL = L.reduce((a, e) => a + alto(e.n) + 26, -26), hR = R.reduce((a, e) => a + alto(e.n) + 26, -26);
+    const H = Math.max(hL, hR) + PAD * 2;
+    const LN = col(L, PAD + (H - PAD * 2 - hL) / 2), RN = col(R, PAD + (H - PAD * 2 - hR) / 2);
+    const pos = {}; LN.forEach(e => pos['o|' + e.k] = { ...e, off: 0 }); RN.forEach(e => pos['d|' + e.k] = { ...e, off: 0 });
+
+    const cintas = flujos.map((v, i) => {
+      const a = pos['o|' + v.o], b = pos['d|' + v.d];
+      const th = v.n ? Math.max(4, v.n * 5.4) : 2;
+      const y1 = a.y + a.off + th / 2, y2 = b.y + b.off + th / 2;
+      a.off += th; b.off += th;
+      const x1 = LX + BAR, x2 = RX, cx = (x1 + x2) / 2;
+      return `<path data-art="${i}" d="M${x1},${y1} C${cx},${y1} ${cx},${y2} ${x2},${y2}" fill="none" stroke="${v.n ? v.c : '#C9C2B0'}" stroke-width="${th}" stroke-linecap="butt" opacity="${v.n ? 0.82 : 0.55}" ${v.n ? '' : 'stroke-dasharray="6 5"'} style="cursor:pointer"></path>`;
+    }).join('');
+
+    const etiqueta = (e, lado) => {
+      const lineas = wrap(e.k, 30);
+      const yc = e.y + e.h / 2 - (lineas.length - 1) * 7;
+      const x = lado === 'o' ? LX - 14 : RX + BAR + 14;
+      return `<g data-artnode="${lado}|${this.esc(e.k)}" style="cursor:pointer">
+        <rect x="${lado === 'o' ? LX : RX}" y="${e.y}" width="${BAR}" height="${e.h}" rx="3" fill="${e.n ? '#24533D' : '#C9C2B0'}"></rect>
+        ${lineas.map((l, i) => `<text x="${x}" y="${yc + i * 14}" text-anchor="${lado === 'o' ? 'end' : 'start'}" style="font:600 12px Archivo,sans-serif;fill:#37413B">${this.esc(l)}</text>`).join('')}
+        <text x="${x}" y="${yc + lineas.length * 14 + 2}" text-anchor="${lado === 'o' ? 'end' : 'start'}" style="font:600 11px IBM Plex Mono,monospace;fill:${e.n ? '#D99A2B' : '#B9B09A'}">${e.n} estudiante${e.n === 1 ? '' : 's'}</text>
+      </g>`;
+    };
+
+    const pill = (v, l) => `<button data-artanio="${v}" style="border:1px solid ${filtro === v ? '#2F6B4F' : '#E5E1D4'};background:${filtro === v ? '#2F6B4F' : '#fff'};color:${filtro === v ? '#fff' : '#46514B'};border-radius:999px;padding:7px 15px;min-height:32px;font:600 11.5px Archivo,sans-serif;cursor:pointer">${l}</button>`;
+
+    host.innerHTML = `
+      <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <div style="display:flex;gap:7px;flex-wrap:wrap">${pill('todos', 'Todos los años')}${anios.map(a => pill(a, a)).join('')}</div>
+        <div style="font:400 12px Spectral,serif;color:#8A8272">${total} estudiante${total === 1 ? '' : 's'} · ${activos} vía${activos === 1 ? '' : 's'} con casos${filtro === 'todos' ? '' : ' en ' + filtro}</div>
+      </div>
+      <div style="width:100%;overflow-x:auto">
+        <svg viewBox="0 0 ${W} ${H}" style="width:100%;min-width:680px;height:auto;display:block">
+          <text x="${LX + BAR}" y="14" text-anchor="end" style="font:600 9.5px Archivo,sans-serif;fill:#8A8272;letter-spacing:.12em">ORIGEN</text>
+          <text x="${RX}" y="14" style="font:600 9.5px Archivo,sans-serif;fill:#8A8272;letter-spacing:.12em">DESTINO</text>
+          ${cintas}
+          ${LN.map(e => etiqueta(e, 'o')).join('')}
+          ${RN.map(e => etiqueta(e, 'd')).join('')}
+        </svg>
+      </div>
+      <div style="font:italic 400 11.5px/1.5 Spectral,serif;color:#8A8272;margin-top:10px">El grosor de cada cinta es proporcional al número de estudiantes. La vía punteada está habilitada y aún no registra casos.</div>`;
+
+    host.querySelectorAll('[data-artanio]').forEach(b => b.addEventListener('click', () => { this.articAnio = b.dataset.artanio; this.artic(); }));
+    const paths = [...host.querySelectorAll('[data-art]')];
+    this.bind(host, '[data-art]', el => {
+      const v = flujos[+el.dataset.art];
+      const det = Object.entries(v.y).sort().map(([a, k]) => `${a}: ${k}`).join(' · ');
+      return `<div>${this.esc(v.o)} → ${this.esc(v.d)}</div><div style="font:400 11.5px Spectral,serif;opacity:.9;margin-top:4px">${v.n ? v.n + ' estudiante' + (v.n === 1 ? '' : 's') + (filtro === 'todos' && det ? ' · ' + det : '') : 'Vía habilitada, sin estudiantes'}</div>`;
+    });
+    paths.forEach(p => {
+      p.addEventListener('mouseenter', () => paths.forEach(q => q.style.opacity = q === p ? 1 : 0.18));
+      p.addEventListener('mouseleave', () => paths.forEach(q => q.style.opacity = ''));
+    });
+    host.querySelectorAll('[data-artnode]').forEach(g => {
+      const [lado, k] = g.dataset.artnode.split('|');
+      g.addEventListener('mouseenter', () => paths.forEach((q, i) => { const v = flujos[i]; q.style.opacity = ((lado === 'o' ? v.o : v.d) === k) ? 1 : 0.18; }));
+      g.addEventListener('mouseleave', () => paths.forEach(q => q.style.opacity = ''));
+    });
+  }
+
+  TCOL = ["#2F6B4F","#5E9578","#D99A2B","#8FA98F","#24533D","#B5883C","#7FA8A0","#9AA88F","#C58A2E","#A79E88"];
+  TAB = {
+    "Magíster en Educación · Currículum y Evaluación": "M. Ed. · Currículum y Evaluación",
+    "Magíster en Educación · Gestión y Liderazgo": "M. Ed. · Gestión y Liderazgo",
+    "Magíster en Arte, Pensamiento y Cultura Latinoam.": "M. Arte, Pensamiento y Cultura",
+    "Magíster en Literatura Latinoam. y Chilena": "M. Literatura Latinoam. y Chilena",
+    "Magíster en Cs. Sociales · Sociedad Civil": "M. Cs. Sociales · Sociedad Civil"
+  };
+
+  tPrograma() {
+    const host = document.getElementById('s4-prog'); if (!host) return;
+    const P = this.T.programas, max = Math.max(...P.map(p => p.n));
+    const anios = ["2024", "2025", "2026"].filter(a => this.T.aniosTot[a]);
+    host.innerHTML = `<div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px">${
+      anios.map((a, i) => `<span style="display:flex;gap:6px;align-items:center;font:400 11.5px Archivo,sans-serif;color:#8A8272"><span style="width:12px;height:10px;border-radius:2px;background:${this.TCOL[i]};display:inline-block"></span>${a}</span>`).join('')
+    }</div>` + P.map(p => `
+      <div style="display:grid;grid-template-columns:250px minmax(0,1fr) 34px;gap:12px;align-items:center;padding:4px 0">
+        <span style="font:600 11.5px Archivo,sans-serif;color:#37413B;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${this.esc(p.prog)}</span>
+        <span style="display:flex;height:16px;border-radius:3px;overflow:hidden;background:#EAE6D9;width:${(p.n / max * 100).toFixed(1)}%">${
+          anios.filter(a => p.anios[a]).map(a => `<span data-tyr="${a}" data-prog="${this.esc(p.prog)}" data-n="${p.anios[a]}" style="width:${(p.anios[a] / p.n * 100).toFixed(2)}%;background:${this.TCOL[anios.indexOf(a)]};cursor:pointer"></span>`).join('')
+        }</span>
+        <span style="font:600 11.5px IBM Plex Mono,monospace;color:#8A8272;text-align:right">${p.n}</span>
+      </div>`).join('');
+    this.bind(host, '[data-tyr]', el => `<div>${this.esc(el.dataset.prog)}</div><div style="font:400 11.5px Spectral,serif;opacity:.9;margin-top:4px">${el.dataset.n} tesis en ${el.dataset.tyr}</div>`);
+  }
+
+  tMatriz() {
+    const host = document.getElementById('s4-matriz'); if (!host) return;
+    const L = this.T.lineas;
+    const progs = this.T.programas.map(p => p.prog);
+    const filas = Object.entries(L).map(([l, m]) => ({ l, m, tot: Object.values(m).reduce((a, b) => a + b, 0) })).sort((a, b) => b.tot - a.tot);
+    const max = Math.max(...filas.flatMap(f => Object.values(f.m)));
+    const cab = progs.map(p => `<span title="${this.esc(p)}" style="font:600 9.5px Archivo,sans-serif;color:#8A8272;writing-mode:vertical-rl;transform:rotate(180deg);height:172px;white-space:nowrap;justify-self:center">${this.esc(this.TAB[p] || p)}</span>`).join('');
+    host.innerHTML = `<div style="min-width:820px;display:grid;grid-template-columns:250px repeat(${progs.length}, minmax(0,1fr)) 34px;gap:3px 4px;align-items:center">
+      <span></span>${cab}<span></span>
+      ${filas.map(f => `<span style="font:400 11.5px Spectral,serif;color:#37413B;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${this.esc(f.l)}</span>` +
+      progs.map(p => {
+        const n = f.m[p] || 0;
+        const a = n ? (0.16 + 0.84 * Math.sqrt(n / max)).toFixed(2) : 0;
+        return `<span ${n ? `data-tcell="1" data-l="${this.esc(f.l)}" data-p="${this.esc(p)}" data-n="${n}"` : ''} style="height:19px;border-radius:3px;background:${n ? `rgba(47,107,79,${a})` : '#EFECE2'};cursor:${n ? 'pointer' : 'default'};display:flex;align-items:center;justify-content:center;font:600 9.5px IBM Plex Mono,monospace;color:${n / max > 0.45 ? '#fff' : '#46514B'}">${n || ''}</span>`;
+      }).join('') +
+      `<span style="font:600 10.5px IBM Plex Mono,monospace;color:#8A8272;text-align:right">${f.tot}</span>`).join('')}
+    </div>`;
+    this.bind(host, '[data-tcell]', el => `<div>${this.esc(el.dataset.l)}</div><div style="font:400 11.5px Spectral,serif;opacity:.9;margin-top:4px">${el.dataset.n} tesis · ${this.esc(el.dataset.p)}</div>`);
+  }
+
+  tTemas() {
+    const host = document.getElementById('s4-temas'); if (!host) return;
+    host.innerHTML = this.T.programas.map((p, i) => {
+      const max = p.temas.length ? p.temas[0].n : 1;
+      const c = this.TCOL[i % this.TCOL.length];
+      return `<article style="background:#fff;border:1px solid #E5E1D4;border-left:3px solid ${c};border-radius:10px;padding:14px 16px">
+        <div style="font:700 13px/1.3 Archivo,sans-serif;color:#24533D">${this.esc(p.prog)}</div>
+        <div style="font:400 11.5px Archivo,sans-serif;color:#8A8272;margin:2px 0 10px">${p.n} tesis</div>
+        <div style="display:flex;flex-direction:column;gap:5px">${p.temas.map(t => `
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) 38px;gap:8px;align-items:center">
+            <span style="font:400 11.5px/1.3 Spectral,serif;color:#46514B">${this.esc(t.t)}</span>
+            <span style="font:600 10.5px IBM Plex Mono,monospace;color:#8A8272;text-align:right">${Math.round(t.n / p.n * 100)}%</span>
+            <span style="grid-column:1 / -1;height:5px;border-radius:3px;background:#EAE6D9;overflow:hidden"><span style="display:block;height:100%;width:${(t.n / max * 100).toFixed(1)}%;background:${c};border-radius:3px"></span></span>
+          </div>`).join('')}</div>
+      </article>`;
+    }).join('');
+  }
+
+  GEN = {
+    mat: [["F", "F", 67], ["F", "M", 43], ["M", "F", 75], ["M", "M", 67], ["M", "SD", 1]],
+    prog: [
+      { p: "Magíster en Educación · Currículum y Evaluación", n: 54, F: 37, M: 17, SD: 0, gF: 27 },
+      { p: "Magíster en Arte, Pensamiento y Cultura Latinoam.", n: 29, F: 19, M: 10, SD: 0, gF: 19 },
+      { p: "Magíster en Literatura Latinoam. y Chilena", n: 26, F: 10, M: 16, SD: 0, gF: 14 },
+      { p: "Doctorado en Estudios Americanos", n: 23, F: 12, M: 11, SD: 0, gF: 14 },
+      { p: "Magíster en Educación · Gestión y Liderazgo", n: 17, F: 6, M: 10, SD: 1, gF: 1 },
+      { p: "Magíster en Ciencias de la Comunicación", n: 15, F: 12, M: 3, SD: 0, gF: 8 },
+      { p: "Magíster en Historia", n: 19, F: 10, M: 9, SD: 0, gF: 9 },
+      { p: "Doctorado en Historia", n: 13, F: 8, M: 5, SD: 0, gF: 3 },
+      { p: "Magíster en Filosofía de las Ciencias", n: 13, F: 3, M: 10, SD: 0, gF: 1 },
+      { p: "Magíster en Ciencias Sociales", n: 10, F: 5, M: 5, SD: 0, gF: 7 },
+      { p: "Magíster en Estudios Internacionales", n: 8, F: 4, M: 4, SD: 0, gF: 0 },
+      { p: "Magíster en Lingüística · Aprendizaje del Inglés", n: 8, F: 5, M: 3, SD: 0, gF: 1 },
+      { p: "Magíster en Estudios Políticos Aplicados", n: 7, F: 2, M: 5, SD: 0, gF: 2 },
+      { p: "Magíster en Psicología Educacional", n: 5, F: 3, M: 2, SD: 0, gF: 2 },
+      { p: "Magíster en Lingüística · Sociolingüística Hispanoam.", n: 5, F: 5, M: 0, SD: 0, gF: 1 }
+    ],
+    tem: [
+      { t: "Innovación curricular, enseñanza y evaluación", F: 22, M: 39 },
+      { t: "Género, feminismos y mujeres", F: 18, M: 10 },
+      { t: "Política, Estado e instituciones", F: 9, M: 14 },
+      { t: "Arte, cultura visual y prácticas artísticas", F: 11, M: 9 },
+      { t: "Gestión y liderazgo educativo", F: 6, M: 13 },
+      { t: "Formación e identidad docente", F: 6, M: 8 },
+      { t: "Movimientos sociales y protesta", F: 3, M: 10 },
+      { t: "Literatura, escritura y narrativa", F: 6, M: 6 },
+      { t: "Comunicación, medios y discurso", F: 5, M: 7 },
+      { t: "Memoria, dictadura y derechos humanos", F: 6, M: 5 },
+      { t: "Migración e interculturalidad", F: 6, M: 4 }
+    ]
+  };
+  GC = { F: "#2F6B4F", M: "#D99A2B", SD: "#B9B09A" };
+  GL = { F: "mujeres", M: "hombres", SD: "sin determinar" };
+
+  genero() {
+    const M = document.getElementById('s3g-mat');
+    if (M) {
+      const val = (g, a) => (this.GEN.mat.find(x => x[0] === g && x[1] === a) || [0, 0, 0])[2];
+      const tot = this.GEN.mat.reduce((a, x) => a + x[2], 0);
+      const cols = ["F", "M", "SD"], rows = ["F", "M"];
+      const max = Math.max(...this.GEN.mat.map(x => x[2]));
+      const abbr = { F: "mujeres", M: "hombres", SD: "s/d" };
+      M.innerHTML = `<div style="font:600 10px Archivo,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#8A8272;margin-bottom:6px">Escriben →</div>
+      <div style="display:grid;grid-template-columns:74px repeat(3, minmax(0,1fr));gap:5px;align-items:center">
+        <span style="font:600 10px Archivo,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#8A8272">Dirigen ↓</span>${cols.map(c => `<span style="display:flex;gap:5px;align-items:center;justify-content:center;font:600 11px Archivo,sans-serif;color:#37413B"><span style="width:9px;height:9px;border-radius:2px;background:${this.GC[c]};flex:0 0 auto"></span>${abbr[c]}</span>`).join('')}
+        ${rows.map(r => `<span style="display:flex;gap:5px;align-items:center;font:600 11.5px Archivo,sans-serif;color:#37413B"><span style="width:9px;height:9px;border-radius:2px;background:${this.GC[r]};flex:0 0 auto"></span>${abbr[r]}</span>` +
+        cols.map(c => { const n = val(r, c), a = n ? (0.14 + 0.86 * Math.sqrt(n / max)).toFixed(2) : 0;
+          return `<span ${n ? `data-gmat="${r}|${c}" data-n="${n}"` : ''} style="height:62px;border-radius:6px;background:${n ? `rgba(47,107,79,${a})` : '#EFECE2'};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:${n ? 'pointer' : 'default'}">
+            <span style="font:600 17px IBM Plex Mono,monospace;color:${n / max > 0.45 ? '#fff' : '#37413B'}">${n || '—'}</span>
+            ${n ? `<span style="font:400 10px Archivo,sans-serif;color:${n / max > 0.45 ? 'rgba(255,255,255,.85)' : '#46514B'}">${Math.round(n / tot * 100)}%</span>` : ''}
+          </span>`; }).join('')).join('')}
+      </div>
+      <div style="font:400 11.5px/1.5 Spectral,serif;color:#8A8272;margin-top:12px">Las profesoras dirigen algo más de la mitad de las tesis escritas por mujeres; los profesores, en cambio, dirigen a hombres y mujeres en proporciones casi iguales.</div>
+      <svg viewBox="0 0 420 210" style="width:100%;height:auto;display:block;margin-top:16px;border-radius:8px" role="img" aria-label="Composición geométrica de dos círculos que se superponen">
+        <rect x="0" y="0" width="420" height="210" fill="#F1EFE8"></rect>
+        <path d="M0,0 L112,0 A112,112 0 0 1 0,112 Z" fill="#E6E2D4"></path>
+        <rect x="0" y="196" width="420" height="14" fill="#37413B"></rect>
+        <circle cx="168" cy="98" r="66" fill="#2F6B4F"></circle>
+        <circle cx="252" cy="98" r="66" fill="#D99A2B" opacity=".92"></circle>
+        <path d="M210,47.1 A66,66 0 0 1 210,148.9 A66,66 0 0 0 210,47.1 Z" fill="#24533D"></path>
+        <rect x="336" y="46" width="14" height="118" fill="#37413B"></rect>
+        <path d="M372,164 L400,108 L420,164 Z" fill="#5E9578"></path>
+      </svg>`;
+      this.bind(M, '[data-gmat]', el => { const [r, c] = el.dataset.gmat.split('|');
+        return `<div>Dirige: ${this.GL[r]} · Escribe: ${this.GL[c]}</div><div style="font:400 11.5px Spectral,serif;opacity:.9;margin-top:4px">${el.dataset.n} tesis</div>`; });
+    }
+
+    const P = document.getElementById('s3g-prog');
+    if (P) {
+      P.innerHTML = [...this.GEN.prog].sort((a, b) => b.n - a.n).map(r => `
+        <div data-gp="${this.esc(r.p)}" data-n="${r.n}" data-f="${r.F}" data-m="${r.M}" data-gf="${r.gF}" style="display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:4px 10px;align-items:center;padding:5px 0;cursor:pointer">
+          <span style="grid-column:1;grid-row:1;font:600 11.5px/1.3 Archivo,sans-serif;color:#37413B">${this.esc(r.p)}</span>
+          <span style="grid-column:1 / -1;grid-row:2;display:flex;height:13px;border-radius:3px;overflow:hidden;background:#EAE6D9">
+            <span style="width:${(r.F / r.n * 100).toFixed(1)}%;background:#2F6B4F"></span>
+            <span style="width:${(r.M / r.n * 100).toFixed(1)}%;background:#D99A2B"></span>
+            <span style="width:${(r.SD / r.n * 100).toFixed(1)}%;background:#B9B09A"></span>
+          </span>
+          <span style="font:600 10.5px IBM Plex Mono,monospace;color:#8A8272;text-align:right;grid-column:2;grid-row:1">${Math.round(r.F / r.n * 100)}%</span>
+        </div>`).join('') +
+        `<div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:12px">
+          <span style="display:flex;gap:6px;align-items:center;font:400 11.5px Archivo,sans-serif;color:#8A8272"><span style="width:12px;height:10px;border-radius:2px;background:#2F6B4F"></span>autoras</span>
+          <span style="display:flex;gap:6px;align-items:center;font:400 11.5px Archivo,sans-serif;color:#8A8272"><span style="width:12px;height:10px;border-radius:2px;background:#D99A2B"></span>autores</span>
+          <span style="display:flex;gap:6px;align-items:center;font:400 11.5px Archivo,sans-serif;color:#8A8272"><span style="width:12px;height:10px;border-radius:2px;background:#B9B09A"></span>sin determinar</span>
+        </div>`;
+      this.bind(P, '[data-gp]', el => `<div>${this.esc(el.dataset.gp)}</div><div style="font:400 11.5px Spectral,serif;opacity:.9;margin-top:4px">${el.dataset.f} autoras y ${el.dataset.m} autores de ${el.dataset.n} tesis · ${el.dataset.gf} dirigidas por profesoras</div>`);
+    }
+
+    const D = document.getElementById('s3g-dir');
+    if (D) {
+      const prom = 43;
+      const filas = [...this.GEN.prog].map(r => ({ ...r, pct: r.gF / r.n * 100 })).sort((a, b) => b.pct - a.pct || b.n - a.n);
+      D.innerHTML = `<div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(330px, 1fr));gap:2px 24px">${
+        filas.map(r => {
+          const alto = r.pct >= prom;
+          return `<div data-gdir="${this.esc(r.p)}" data-gf="${r.gF}" data-n="${r.n}" data-pct="${Math.round(r.pct)}" style="display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:3px 10px;align-items:center;padding:5px 0;cursor:pointer">
+            <span style="grid-column:1;grid-row:1;font:600 11.5px/1.3 Archivo,sans-serif;color:#37413B">${this.esc(r.p)}</span>
+            <span style="grid-column:2;grid-row:1;font:600 10.5px IBM Plex Mono,monospace;color:${alto ? '#2F6B4F' : '#94571B'};text-align:right">${Math.round(r.pct)}%</span>
+            <span style="grid-column:1 / -1;grid-row:2;position:relative;display:block;height:13px;border-radius:3px;background:#EAE6D9;overflow:hidden">
+              <span style="display:block;height:100%;width:${r.pct.toFixed(1)}%;background:${alto ? '#2F6B4F' : '#D99A2B'};border-radius:3px"></span>
+              <span style="position:absolute;top:-2px;bottom:-2px;left:${prom}%;width:2px;background:${alto ? 'rgba(255,255,255,.92)' : '#37413B'}"></span>
+            </span>
+          </div>`;
+        }).join('')
+      }</div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:14px">
+        <span style="display:flex;gap:6px;align-items:center;font:400 11.5px Archivo,sans-serif;color:#8A8272"><span style="width:12px;height:10px;border-radius:2px;background:#2F6B4F"></span>sobre el promedio</span>
+        <span style="display:flex;gap:6px;align-items:center;font:400 11.5px Archivo,sans-serif;color:#8A8272"><span style="width:12px;height:10px;border-radius:2px;background:#D99A2B"></span>bajo el promedio</span>
+        <span style="display:flex;gap:6px;align-items:center;font:400 11.5px Archivo,sans-serif;color:#8A8272"><span style="width:12px;height:10px;border-radius:2px;background:#EAE6D9;border-left:2px solid #37413B"></span>promedio del periodo, 43%</span>
+      </div>`;
+      this.bind(D, '[data-gdir]', el => `<div>${this.esc(el.dataset.gdir)}</div><div style="font:400 11.5px Spectral,serif;opacity:.9;margin-top:4px">${el.dataset.gf} de ${el.dataset.n} tesis dirigidas por profesoras (${el.dataset.pct}%)</div>`);
+    }
+
+    const T = document.getElementById('s3g-tem');
+    if (T) {
+      const max = Math.max(...this.GEN.tem.map(r => Math.max(r.F, r.M)));
+      T.innerHTML = `<div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:4px 24px">${
+        this.GEN.tem.map(r => { const n = r.F + r.M; return `
+        <div data-gt="${this.esc(r.t)}" data-f="${r.F}" data-m="${r.M}" style="display:grid;grid-template-columns:minmax(0,1fr) 52px;gap:8px;align-items:center;padding:4px 0;cursor:pointer">
+          <span style="font:400 11.5px/1.3 Spectral,serif;color:#46514B">${this.esc(r.t)}</span>
+          <span style="font:600 10.5px IBM Plex Mono,monospace;color:#8A8272;text-align:right">${Math.round(r.F / n * 100)}%</span>
+          <span style="grid-column:1 / -1;display:flex;height:9px;border-radius:3px;overflow:hidden;background:#EFECE2">
+            <span style="width:${(r.F / max * 50).toFixed(1)}%;background:#2F6B4F"></span>
+            <span style="width:${(r.M / max * 50).toFixed(1)}%;background:#D99A2B"></span>
+          </span>
+        </div>`; }).join('')
+      }</div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:14px">
+        <span style="display:flex;gap:6px;align-items:center;font:400 11.5px Archivo,sans-serif;color:#8A8272"><span style="width:12px;height:10px;border-radius:2px;background:#2F6B4F"></span>tesis dirigidas por profesoras</span>
+        <span style="display:flex;gap:6px;align-items:center;font:400 11.5px Archivo,sans-serif;color:#8A8272"><span style="width:12px;height:10px;border-radius:2px;background:#D99A2B"></span>tesis dirigidas por profesores</span>
+      </div>
+      <div style="font:400 11.5px/1.5 Spectral,serif;color:#8A8272;margin-top:10px">Género, feminismos y mujeres es el tema con mayor presencia de profesoras guía (18 de 28 tesis, 64%), por sobre el 43% del periodo; movimientos sociales y protesta es el más bajo entre los temas frecuentes (3 de 13).</div>`;
+      this.bind(T, '[data-gt]', el => `<div>${this.esc(el.dataset.gt)}</div><div style="font:400 11.5px Spectral,serif;opacity:.9;margin-top:4px">${el.dataset.f} dirigidas por profesoras · ${el.dataset.m} por profesores</div>`);
+    }
+  }
+
+  tProyectos() {
+    const host = document.getElementById('s4-proy'); if (!host) return;
+    const P = [...this.T.programas].map(p => ({ ...p, pct: p.n ? p.conProyecto / p.n : 0 })).filter(p => p.conProyecto > 0).sort((a, b) => b.pct - a.pct || b.conProyecto - a.conProyecto);
+    const fondos = Object.entries(this.T.fondosTot).sort((a, b) => b[1] - a[1]);
+    host.innerHTML = `
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px">${
+        fondos.map(([f, n], i) => `<span style="display:flex;gap:8px;align-items:baseline;background:#fff;border:1px solid #E5E1D4;border-radius:8px;padding:8px 13px"><span style="font:600 13px IBM Plex Mono,monospace;color:${this.TCOL[i % this.TCOL.length]}">${n}</span><span style="font:400 11.5px Archivo,sans-serif;color:#46514B">${this.esc(f)}</span></span>`).join('')
+      }</div>
+      ${P.map(p => `
+        <div style="display:grid;grid-template-columns:250px minmax(0,1fr) 74px;gap:12px;align-items:center;padding:4px 0">
+          <span style="font:600 11.5px Archivo,sans-serif;color:#37413B;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${this.esc(p.prog)}</span>
+          <span data-tpr="${this.esc(p.prog)}" data-n="${p.conProyecto}" data-t="${p.n}" data-d="${p.proyectos}" style="display:block;height:15px;border-radius:3px;background:#EAE6D9;overflow:hidden;cursor:pointer"><span style="display:block;height:100%;width:${(p.pct * 100).toFixed(1)}%;background:#D99A2B;border-radius:3px"></span></span>
+          <span style="font:600 10.5px IBM Plex Mono,monospace;color:#8A8272;text-align:right">${Math.round(p.pct * 100)}% · ${p.conProyecto}</span>
+        </div>`).join('')}`;
+    this.bind(host, '[data-tpr]', el => `<div>${this.esc(el.dataset.tpr)}</div><div style="font:400 11.5px Spectral,serif;opacity:.9;margin-top:4px">${el.dataset.n} de ${el.dataset.t} tesis con proyecto · ${el.dataset.d} proyectos distintos</div>`);
+  }
 
   acred() {
     const host = document.getElementById('s2-acred'); if (!host) return;
